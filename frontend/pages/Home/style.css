@@ -1,0 +1,89 @@
+html {
+  font-family: Helvetica;
+}
+
+body {
+  background-color: #eaf7e6;
+  padding-top: 100px;
+  padding: 100px 50px 50px;
+}
+
+.navbar {
+  background-color: white;
+}
+.nav-link {
+  color: #02785d;
+  font-weight: bold;
+}
+
+.nav-link:focus {
+  color: #02785d;
+}
+
+.dropdown-menu {
+  background-color: #02785d;
+}
+
+.dropdown-menu a {
+  color: white;
+}
+
+.dropdown-menu > li > a:hover {
+  background-color: initial;
+  color: #c3edcc;
+}
+
+.btn-success {
+  background-color: #02785d;
+  margin: 0px 5px;
+}
+
+#landing-title {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+}
+
+#landing-subtitle {
+  text-align: center;
+  font-family: "Playfair Display", serif;
+}
+
+#landing-img {
+    margin: 60px;
+}
+
+#about-desc {
+    padding: 0px 30px;
+    text-align: center;
+}
+
+.header {
+  color: #02785d;
+  text-align: center;
+  margin: 30px 0px;
+}
+
+.subheader {
+    color: #EAF7E6;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.col-sm {
+  background-color: #02785d;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.col-sm .header {
+  color: #EAF7E6;
+}
+
+.col-gap {
+  column-gap: 2rem;
+  row-gap: 2rem;
+}
+
+.service-img {
+    width: 150px;
+}
