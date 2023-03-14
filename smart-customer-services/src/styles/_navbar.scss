@@ -1,0 +1,30 @@
+.navbar {
+  background-color: white;
+
+  .nav-link {
+    color: #02785d;
+    font-weight: bold;
+
+    &:focus {
+      color: #02785d;
+    }
+  }
+}
+
+.dropdown-menu {
+  background-color: #02785d;
+
+  a {
+    color: white;
+  }
+
+  > li > a:hover {
+    background-color: initial;
+    color: #c3edcc;
+  }
+}
+
+.btn-success {
+  background-color: #02785d;
+  margin: 0px 5px;
+}
