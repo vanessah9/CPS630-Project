@@ -39,23 +39,23 @@ export default function Navbar(props: InputProps) {
                   ["Delivery", "#services-delivery"],
                 ]}
               />
-              <NavItem text="Reviews" link="./Reviews.tsx" dropdown={false} />
-              <NavItem text="Contact" link="./Contact.tsx" dropdown={false} />
+              <NavItem text="Reviews" link="./reviews" dropdown={false} />
+              <NavItem text="Contact" link="./contact" dropdown={false} />
             </ul>
 
             <div className="navbar-nav dropdown-center">
               <NavButton
                 icon={ShoppingCart}
                 dropdown_items={[
-                  ["View Cart", "#"],
-                  ["Checkout", "#"],
+                  ["View Cart", "./cart"],
+                  ["Checkout", "./checkout"],
                 ]}
               />
               <NavButton
                 icon={User}
                 dropdown_items={[
-                  ["Login", "./../Login/login.html"],
-                  ["Signup", "./../Signup/signin.html"],
+                  ["Login", "./login"],
+                  ["Signup", "./signup"],
                 ]}
               />
             </div>

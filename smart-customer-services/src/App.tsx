@@ -6,6 +6,8 @@ import Contact from "./components/Contact";
 import Reviews from "./components/Reviews";
 import Signup from "./components/Signup";
 import Login from "./components/Login";
+import Cart from "./components/Cart";
+import Checkout from "./components/Checkout";
 
 function App() {
   return (
@@ -17,10 +19,12 @@ function App() {
         <div className="content-div">
           <Routes>
             <Route path="/" element={<Home />} />
-            {/* <Route path="/contact" element={<Contact />} />
+            <Route path="/contact" element={<Contact />} />
             <Route path="/reviews" element={<Reviews />} />
+            <Route path="/cart" element={<Cart />} />
+            <Route path="/checkout" element={<Checkout />} />
             <Route path="/signup" element={<Signup />} />
-            <Route path="/login" element={<Login />} /> */}
+            <Route path="/login" element={<Login />} />
           </Routes>
         </div>
       </div>
