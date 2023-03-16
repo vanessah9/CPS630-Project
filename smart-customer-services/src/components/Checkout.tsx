@@ -12,13 +12,49 @@ export default function Checkout(props: InputProps) {
     navigate("/invoice", { state: { shippingCost: { shippingCost } } });
   };
 
-  const [selectedOption, setSelectedOption] = useState<number | null>(null);
+  const [selectedOption, setSelectedOption] = useState("");
   const [shippingCost, setShippingCost] = useState<number>(0);
+  const [estimateDelivery, setEstimateDelivery] = useState<Date | null>(null);
 
   const handleOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selected = Number(e.target.value);
+    const selected = e.target.value;
     setSelectedOption(selected);
-    setShippingCost(selected);
+
+    let daysToAdd = 0;
+    let hoursToAdd = 0;
+    let shipping = 0;
+
+    switch (selected) {
+      case "toronto":
+        daysToAdd = 1;
+        hoursToAdd = 5;
+        shipping = 10;
+        break;
+      case "brampton":
+        daysToAdd = 3;
+        hoursToAdd = 10;
+        shipping = 12;
+        break;
+      case "markham":
+        daysToAdd = 5;
+        hoursToAdd = 5;
+        shipping = 15;
+        break;
+      default:
+        daysToAdd = 0;
+        hoursToAdd = 0;
+        shipping = 0;
+    }
+
+    const currentDate = new Date();
+    const deliveryDate = new Date(
+      currentDate.getTime() +
+        daysToAdd * 24 * 60 * 60 * 1000 +
+        hoursToAdd * 60 * 60 * 1000
+    );
+
+    setEstimateDelivery(deliveryDate);
+    setShippingCost(shipping);
   };
 
   return (
@@ -38,15 +74,23 @@ export default function Checkout(props: InputProps) {
           <option value="" disabled>
             Select an option
           </option>
-          <option value={10}>Toronto</option>
-          <option value={12}>Brampton</option>
-          <option value={15}>Markham</option>
+          <option value="toronto">Toronto</option>
+          <option value="brampton">Brampton</option>
+          <option value="markham">Markham</option>
         </select>
         <label htmlFor="branchSelection">Branch</label>
       </div>
-      <p className="checkout-subtitle">Estimated Delivery</p>
-      <p className="checkout-text">Date: </p>
-      <p className="checkout-text">Time: </p>
+      {estimateDelivery && (
+        <p className="checkout-subtitle">
+          <strong>Estimated Delivery: </strong>
+          {estimateDelivery.toLocaleString([], {
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+        </p>
+      )}
 
       <button
         type="button"
