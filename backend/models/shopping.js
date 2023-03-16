@@ -1,50 +1,34 @@
 const mongoose = require("mongoose");
 
 const shoppingSchema = new mongoose.Schema({
-  storeCode: String,
-  storeAddress: String,
-  storeName: String,
-  storePhone: {
-    type: String,
-    unique: true,
+  userId: {
+    type: mongoose.SchemaTypes.ObjectId,
+    required: true,
   },
-  storeEmail: {
-    type: String,
-    unique: true,
+  itemId: {
+    type: [mongoose.SchemaTypes.ObjectId],
+    required: true,
   },
-  storeWebsite: String,
-  date: Date,
-  time: String,
-  transactionCode: String,
-  items: [
-    {
-      itemId: mongoose.SchemaTypes.ObjectId,
-      itemName: String,
-      description: String,
-      price: {
-        type: Number,
-        default: 0,
-      },
-      quantity: {
-        type: Number,
-        default: 0,
-      },
-      madeIn: String,
-      deptCode: String,
-      category: String,
-      image: String,
-      rating: {
-        type: Number,
-        default: 0,
-      },
-    },
-  ],
+  storeCode: {
+    type: String,
+    required: true,
+  },
+  date: {
+    type: Date,
+    default: Date.now,
+  },
+  time: {
+    type: Number,
+    default: 0,
+  },
+  paymentMethod: {
+    type: String,
+    default: "",
+  },
   totalPrice: {
     type: Number,
     default: 0,
   },
-  trasactionType: String, //sale, return, exchange
-  paymentMethod: String,
 });
 
 module.exports = mongoose.model("Shopping", shoppingSchema);

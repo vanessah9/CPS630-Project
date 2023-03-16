@@ -1,22 +1,46 @@
 const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
-  userId: mongoose.SchemaTypes.ObjectId,
-  itemsId: [mongoose.SchemaTypes.ObjectId],
-  tripId: mongoose.SchemaTypes.ObjectId,
-  receiptId: mongoose.SchemaTypes.ObjectId,
+  userId: {
+    type: mongoose.SchemaTypes.ObjectId,
+    required: true,
+  },
+  itemsId: {
+    type: [mongoose.SchemaTypes.ObjectId],
+    required: true,
+  },
+  tripId: {
+    type: mongoose.SchemaTypes.ObjectId,
+    required: true,
+  },
+  receiptId: {
+    type: mongoose.SchemaTypes.ObjectId,
+    required: true,
+  },
   totalPrice: {
     type: Number,
     default: 0,
   },
-  shippingAddress: String,
-  billingAddress: String,
-  paymentMethod: String,
+  shippingAddress: {
+    type: String,
+    required: true,
+  },
+  billingAddress: {
+    type: String,
+    required: true,
+  },
+  paymentMethod: {
+    type: String,
+    default: "",
+  },
   trackingNumber: {
     type: String,
     unique: true,
   },
-  dateIssued: Date,
+  dateIssued: {
+    type: Date,
+    default: Date.now,
+  },
   dateShipped: Date,
   dateReceived: Date,
   status: {
