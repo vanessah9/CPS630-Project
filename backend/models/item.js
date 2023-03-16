@@ -1,8 +1,14 @@
 const mongoose = require("mongoose");
 
 const itemSchema = new mongoose.Schema({
-  name: String,
-  description: String,
+  name: {
+    type: String,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
   price: {
     type: Number,
     default: 0,
@@ -11,13 +17,21 @@ const itemSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  madeIn: String,
-  deptCode: String,
-  category: String,
-  image: String,
-  rating: {
-    type: Number,
-    default: 0,
+  madeIn: {
+    type: String,
+    required: true,
+  },
+  deptCode: {
+    type: String,
+    required: true,
+  },
+  category: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    required: true,
   },
 });
 
