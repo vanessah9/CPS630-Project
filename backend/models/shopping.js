@@ -1,6 +1,10 @@
 const mongoose = require("mongoose");
 
 const shoppingSchema = new mongoose.Schema({
+  userId: {
+    type: mongoose.SchemaTypes.ObjectId,
+    required: true,
+  },
   itemId: {
     type: [mongoose.SchemaTypes.ObjectId],
     required: true,
