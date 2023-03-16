@@ -1,10 +1,11 @@
 const verifyJWT = require("../middleware/verifyJWT");
+const verifyAdmin = require("../middleware/verifyAdmin");
 
 const Truck = require("../models/truck");
 const { createTruckPayload } = require("../schemas/truck");
 
 module.exports = function (app) {
-  app.post("/truck", verifyJWT, async (req, res) => {
+  app.post("/truck", verifyJWT, verifyAdmin, async (req, res) => {
     const body = req.body;
 
     const { error, value } = createTruckPayload.validate(body);
