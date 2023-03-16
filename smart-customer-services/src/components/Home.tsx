@@ -1,13 +1,10 @@
 import Navbar from "./Navbar";
-import DeliveryPerson from '../assets/images/delivery_person.svg';
-import ShoppingBag from '../assets/icons/shopping-bag.svg';
-import Truck from '../assets/icons/truck.svg';
+import DeliveryPerson from '@/assets/images/delivery_person.svg';
+import ShoppingBag from '@/assets/icons/shopping-bag.svg';
+import Truck from '@/assets/icons/truck.svg';
 
-interface InputProps {
-  name?: String;
-}
 
-export default function Home(props: InputProps) {
+export default function Home() {
   return <div className="home">
     <Navbar/>
     <div className="home-content">
