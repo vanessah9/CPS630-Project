@@ -1,0 +1,17 @@
+.login {
+  &-title {
+    text-align: center;
+    font-size: $title;
+    font-weight: $bold;
+    margin-bottom: 30px;
+  }
+
+  &-form {
+    margin: 20px;
+  }
+
+  &-btn {
+    margin: auto;
+    display: block;
+  }
+}
