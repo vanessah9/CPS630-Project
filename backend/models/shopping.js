@@ -18,8 +18,8 @@ const shoppingSchema = new mongoose.Schema({
     default: Date.now,
   },
   time: {
-    type: String,
-    required: true,
+    type: Number,
+    default: 0,
   },
   paymentMethod: {
     type: String,
