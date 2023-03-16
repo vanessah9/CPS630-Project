@@ -1,15 +1,26 @@
 const mongoose = require("mongoose");
 
 const truckSchema = new mongoose.Schema({
-  tripId: mongoose.SchemaTypes.ObjectId,
-  code: String,
-  availabiliyCode: String,
-  type: String,
+  tripId: {
+    type: mongoose.SchemaTypes.ObjectId,
+    required: true,
+  },
+  truckCode: {
+    type: String,
+    required: true,
+  },
+  availabilityCode: {
+    type: String,
+    required: true,
+  },
   status: {
     type: String,
     default: "Available",
   },
-  location: String,
+  location: {
+    type: String,
+    required: true,
+  },
   currentStatus: {
     type: String,
     default: "Idle",

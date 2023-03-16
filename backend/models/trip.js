@@ -1,9 +1,18 @@
 const mongoose = require("mongoose");
 
 const tripSchema = new mongoose.Schema({
-  truckId: mongoose.SchemaTypes.ObjectId,
-  sourceCode: String,
-  destinationCode: String,
+  truckId: {
+    type: mongoose.SchemaTypes.ObjectId,
+    required: true,
+  },
+  sourceCode: {
+    type: String,
+    required: true,
+  },
+  destinationCode: {
+    type: String,
+    required: true,
+  },
   distance: {
     type: Number,
     default: 0,
