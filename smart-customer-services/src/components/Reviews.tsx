@@ -1,7 +1,3 @@
-interface InputProps {
-  name?: String;
-}
-
-export default function Home(props: InputProps) {
+export default function Home() {
   return <div className="">Hi</div>;
 }
