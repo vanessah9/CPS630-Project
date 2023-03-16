@@ -11,12 +11,15 @@ function verifyJWT(req, res, next) {
           error: "Failed To Authenticate",
         });
       }
+
       let user;
+
       try {
         user = await User.findOne({ _id: decoded.id });
       } catch (e) {
         return res.status(400).json({ error: "Incorrect Token Given" });
       }
+
       req.user = { id: user._id, email: user.email, isAdmin: user.isAdmin };
       next();
     });
