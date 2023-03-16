@@ -5,7 +5,6 @@ const { getItemSchema, addItemSchema } = require("../schemas/item");
 
 module.exports = function (app) {
   app.get("/item", verifyJWT, async (req, res) => {
-    user = req.user;
     body = req.body;
 
     const { error, value } = getItemSchema.validate(body);
