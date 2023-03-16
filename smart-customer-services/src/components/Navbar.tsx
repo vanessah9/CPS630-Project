@@ -1,5 +1,5 @@
-import User from "../assets/icons/user.svg";
-import ShoppingCart from "../assets/icons/shopping-cart.svg";
+import User from "@/assets/icons/user.svg";
+import ShoppingCart from "@/assets/icons/shopping-cart.svg";
 import NavItem from "./NavItem";
 import NavButton from "./NavButton";
 
