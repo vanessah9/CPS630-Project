@@ -16,7 +16,7 @@ export default function Checkout(props: InputProps) {
   const [shippingCost, setShippingCost] = useState<number>(0);
   const [estimateDelivery, setEstimateDelivery] = useState<Date | null>(null);
 
-  const handleOptionChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  const handleOptionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const selected = e.target.value;
     setSelectedOption(selected);
 
