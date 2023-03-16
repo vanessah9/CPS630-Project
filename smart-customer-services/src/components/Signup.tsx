@@ -1,8 +1,4 @@
-interface InputProps {
-  name?: String;
-}
-
-export default function Signup(props: InputProps) {
+export default function Signup() {
   return (
     <div className="signup">
       <h1>Sign Up</h1>

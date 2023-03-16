@@ -2,11 +2,8 @@ import { useNavigate } from "react-router-dom";
 import ItemsTable from "./ItemsTable";
 import { ChangeEvent, useState } from "react";
 
-interface InputProps {
-  name?: String;
-}
 
-export default function Checkout(props: InputProps) {
+export default function Checkout() {
   const navigate = useNavigate();
   const invoicePage = () => {
     navigate("/invoice", { state: { shippingCost: { shippingCost } } });

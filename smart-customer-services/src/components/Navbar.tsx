@@ -3,11 +3,8 @@ import ShoppingCart from "@/assets/icons/shopping-cart.svg";
 import NavItem from "./NavItem";
 import NavButton from "./NavButton";
 
-interface InputProps {
-  name?: String;
-}
 
-export default function Navbar(props: InputProps) {
+export default function Navbar() {
   return (
     <div className="Navbar">
       <nav className="navbar navbar-expand-lg fixed-top shadow">

@@ -1,11 +1,8 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import ItemsTable from "./ItemsTable";
 
-interface InputProps {
-  name?: number;
-}
 
-export default function Invoice(props: InputProps) {
+export default function Invoice() {
   const location = useLocation();
   const navigate = useNavigate();
 
