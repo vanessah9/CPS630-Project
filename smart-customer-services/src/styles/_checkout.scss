@@ -1,0 +1,30 @@
+.checkout {
+  &-title {
+    text-align: center;
+    font-size: $title;
+    font-weight: $bold;
+  }
+
+  &-small-title {
+    text-align: center;
+    font-size: $small-title;
+  }
+
+  &-subtitle {
+    font-size: $subtitle;
+  }
+
+  &-text {
+    font-size: $body-text;
+    margin-top: 20px;
+  }
+
+  &-branch-select {
+    margin: 30px 0px;
+  }
+
+  &-btn {
+    margin: auto;
+    display: block;
+  }
+}
