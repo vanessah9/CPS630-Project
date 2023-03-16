@@ -8,6 +8,8 @@ import Signup from "./components/Signup";
 import Login from "./components/Login";
 import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
+import Invoice from "./components/Invoice";
+import OrderConfirmation from "./components/OrderConfirmation";
 
 function App() {
   return (
@@ -19,12 +21,15 @@ function App() {
         <div className="content-div">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/home" element={<Home />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/reviews" element={<Reviews />} />
             <Route path="/cart" element={<Cart />} />
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/invoice" element={<Invoice />} />
+            <Route path="/orderConfirmation" element={<OrderConfirmation />} />
           </Routes>
         </div>
       </div>
