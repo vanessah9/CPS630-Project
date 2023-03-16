@@ -5,7 +5,7 @@ const { registerSchema, loginSchema } = require("../schemas/user");
 const User = require("../models/user");
 const createJWT = require("../libs/createJWT");
 
-module.exports = function (app, mongoose) {
+module.exports = function (app) {
   app.get("/login", async (req, res) => {
     const body = req.body;
     const { error, value } = loginSchema.validate(body);
@@ -26,7 +26,7 @@ module.exports = function (app, mongoose) {
       const isCorrectPassword = await bcrypt.compare(password, user.password);
 
       if (isCorrectPassword) {
-        const token = createJWT({id:user._id, email: user.email});
+        const token = createJWT({ id: user._id, email: user.email });
         return res.status(200).json({ data: token });
       }
 
@@ -48,9 +48,9 @@ module.exports = function (app, mongoose) {
       body.password = await bcrypt.hash(body.password, 13);
 
       const user = await User.create(body);
-      
+
       const token = createJWT({ id: user._id, email: user.email });
-      
+
       return res.status(200).json({ data: token });
     } catch (e) {
       return res.status(409).json({ error: e });
