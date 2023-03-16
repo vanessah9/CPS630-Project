@@ -21,6 +21,10 @@ const shoppingSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  totalPrice: {
+    type: Number,
+    default: 0,
+  },
 });
 
 module.exports = mongoose.model("Shopping", shoppingSchema);
