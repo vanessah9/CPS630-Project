@@ -60,4 +60,24 @@ module.exports = function (app, mongoose) {
       return res.status(400).json({ error: e });
     }
   });
+
+  app.get("/invoice", verifyJWT, async (req, res) => {
+    const user = req.user;
+
+    try {
+      const invoices = await Shopping.find({ userId: user.id });
+
+      let invoicesWithItemsInfo = [];
+
+      for (const invoice of invoices) {
+        const items = await Items.find({ _id: { $in: invoice._doc.itemId } });
+
+        invoicesWithItemsInfo.push({ ...invoice._doc, itemId: items });
+      }
+
+      return res.status(200).json({ data: invoicesWithItemsInfo });
+    } catch (e) {
+      return res.status(400).json({ error: "No invoices in our records" });
+    }
+  });
 };
