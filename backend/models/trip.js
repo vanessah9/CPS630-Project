@@ -4,6 +4,7 @@ const tripSchema = new mongoose.Schema({
   truckId: {
     type: mongoose.SchemaTypes.ObjectId,
     required: true,
+    ref: "tuck",
   },
   sourceCode: {
     type: String,
