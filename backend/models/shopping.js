@@ -4,10 +4,12 @@ const shoppingSchema = new mongoose.Schema({
   userId: {
     type: mongoose.SchemaTypes.ObjectId,
     required: true,
+    ref: "user",
   },
   itemId: {
     type: [mongoose.SchemaTypes.ObjectId],
     required: true,
+    ref: "item",
   },
   storeCode: {
     type: String,

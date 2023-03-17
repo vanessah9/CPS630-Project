@@ -8,14 +8,17 @@ const orderSchema = new mongoose.Schema({
   itemsId: {
     type: [mongoose.SchemaTypes.ObjectId],
     required: true,
+    ref: "item",
   },
   tripId: {
     type: mongoose.SchemaTypes.ObjectId,
     required: true,
+    ref: "trip",
   },
   receiptId: {
     type: mongoose.SchemaTypes.ObjectId,
     required: true,
+    ref: "shopping",
   },
   totalPrice: {
     type: Number,
