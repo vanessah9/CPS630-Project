@@ -1,5 +1,6 @@
 import { useNavigate, useLocation } from "react-router-dom";
 import ItemsTable from "./ItemsTable";
+import DeliveryMap from "./DeliveryMap";
 
 
 export default function Invoice() {
@@ -18,7 +19,8 @@ export default function Invoice() {
   return (
     <div className="invoice">
       <h1 className="invoice-title">Invoice</h1>
-      <ItemsTable invoice={true} shippingCost={stateProps.shippingCost} />
+      <ItemsTable isInvoice={true} shippingCost={stateProps.shippingCost} />
+      <DeliveryMap branch={"Toronto"} address={"Markham"}/>
       <div className="d-flex justify-content-center">
         <button
           type="button"

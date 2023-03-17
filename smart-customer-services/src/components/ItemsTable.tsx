@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { getInvoice } from "../api/invoiceApi";
 
 interface Item {
   id: number;
@@ -8,12 +9,29 @@ interface Item {
 
 interface InputProps {
   items?: Item[];
-  invoice?: Boolean;
+  isInvoice?: Boolean;
   shippingCost?: number;
   // change to not optional later
 }
 
-export default function ItemsTable({ items, invoice, shippingCost=0 }: InputProps) {
+export default function ItemsTable({
+  items,
+  isInvoice,
+  shippingCost = 0,
+}: InputProps) {
+
+  // const [invoice, setInvoice] = useState([]);
+
+  // useEffect(() => {
+  //   const fetchInvoice= async () => {
+  //     const invoiceData = await getInvoice();
+  //     setInvoice(invoiceData);
+  //   };
+  //   fetchInvoice();
+  // }, []);
+
+  // console.log('Hi', invoice)
+
   // { items }: InputProps
   const data: Item[] = [
     {
@@ -40,7 +58,7 @@ export default function ItemsTable({ items, invoice, shippingCost=0 }: InputProp
       (accumulator, currentItem) => accumulator + currentItem.price,
       0
     );
-    setTotalPrice(total+shippingCost);
+    setTotalPrice(total + shippingCost);
   }, []);
 
   const formattedPrice = totalPrice.toLocaleString("en-US", {
@@ -51,14 +69,14 @@ export default function ItemsTable({ items, invoice, shippingCost=0 }: InputProp
   const rows = data.map((item) => (
     <tr key={item.id}>
       <td>{item.name}</td>
-      <td>{'$' + item.price}</td>
+      <td>{"$" + item.price}</td>
     </tr>
   ));
 
   rows.push(
     <tr>
       <th scope="row">Shipping</th>
-      <td>{'$' + shippingCost}</td>
+      <td>{"$" + shippingCost}</td>
     </tr>
   );
 
@@ -73,7 +91,7 @@ export default function ItemsTable({ items, invoice, shippingCost=0 }: InputProp
         </thead>
         <tbody>
           {rows}
-          {invoice && (
+          {isInvoice && (
             <tr className="table-group-divider">
               <th scope="row">Subtotal</th>
               <td>{formattedPrice}</td>
