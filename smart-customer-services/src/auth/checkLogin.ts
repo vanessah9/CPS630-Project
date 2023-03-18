@@ -15,7 +15,7 @@ export default function isLoggedIn(
     // })
     .catch((err) => {
       localStorage.removeItem("token");
-      if (currentPath !== "/login" && currentPath !== "/register") {
+      if (currentPath !== "/login" && currentPath !== "/signup") {
         navigate("/login");
       }
     });
