@@ -27,7 +27,7 @@ module.exports = function (app, mongoose) {
 
       //find a truck available
       const availableTruck = await Truck.findOne().sort({
-        availabilityCode: -1,
+        availabilityCode: 1,
       });
 
       await Truck.findByIdAndUpdate(availableTruck._id, {
