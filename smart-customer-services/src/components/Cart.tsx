@@ -1,3 +1,14 @@
+import checkLogin from "@/auth/checkLogin";
+import { useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+
 export default function Cart() {
-  return <div className="">Hi</div>;
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    checkLogin(navigate, location.pathname);
+  }, [navigate, location.pathname]);
+
+  return <div className="">Cart</div>;
 }

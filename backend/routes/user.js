@@ -5,8 +5,10 @@ const { registerSchema, loginSchema } = require("../schemas/user");
 const User = require("../models/user");
 const createJWT = require("../libs/createJWT");
 
+const verifyJWT = require("../middleware/verifyJWT");
+
 module.exports = function (app) {
-  app.get("/login", async (req, res) => {
+  app.post("/login", async (req, res) => {
     const body = req.body;
     const { error, value } = loginSchema.validate(body);
 
@@ -27,7 +29,7 @@ module.exports = function (app) {
 
       if (isCorrectPassword) {
         const token = createJWT({ id: user._id, email: user.email });
-        return res.status(200).json({ data: token });
+        return res.status(200).json({ token });
       }
 
       return res.status(409).json({ error: "Email/password incorrect" });
@@ -51,9 +53,14 @@ module.exports = function (app) {
 
       const token = createJWT({ id: user._id, email: user.email });
 
-      return res.status(200).json({ data: token });
+      return res.status(200).json({ token });
     } catch (e) {
       return res.status(409).json({ error: e });
     }
   });
+
+  app.get("/checklogin", verifyJWT, (req, res) => {
+    res.status(200).json({ message: "success" });
+  });
+  
 };
