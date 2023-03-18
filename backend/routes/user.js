@@ -55,7 +55,7 @@ module.exports = function (app) {
 
       return res.status(200).json({ token });
     } catch (e) {
-      return res.status(409).json({ error: e });
+      return res.status(409).json({ error: e.message });
     }
   });
 
