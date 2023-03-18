@@ -2,12 +2,13 @@ const mongoose = require("mongoose");
 
 const truckSchema = new mongoose.Schema({
   truckCode: {
-    type: String,
+    type: Number,
     required: true,
   },
   availabilityCode: {
-    type: String,
+    type: Number,
     required: true,
+    default: 0,
   },
   location: {
     type: String,

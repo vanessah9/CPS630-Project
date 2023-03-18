@@ -10,7 +10,7 @@ const tripSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  destinationCode: {
+  destination: {
     type: String,
     required: true,
   },
