@@ -10,7 +10,6 @@ const orderPayload = Joi.object({
   location: coordinatePayload,
   destination: coordinatePayload,
   storeCode: Joi.string().required(),
-  paymentMethod: Joi.string().required(),
   items: Joi.array().items(Joi.string()).min(1).required(),
   paymentMethod: Joi.string().required(),
 });
