@@ -22,7 +22,6 @@ const APIKEY = import.meta.env.VITE_GOOGLE_KEY;
 Geocode.setApiKey(APIKEY!);
 
 function DeliveryMap({ branch, address }: InputProps) {
-
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: APIKEY!,
@@ -97,35 +96,37 @@ function DeliveryMap({ branch, address }: InputProps) {
   }, []);
 
   return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={10}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-      options={OPTIONS}
-    >
-      {source && (
-        <Marker position={{ lat: source.lat, lng: source.lng }} label="A" />
-      )}
-      {destination && (
-        <Marker
-          position={{ lat: destination.lat, lng: destination.lng }}
-          label="B"
-        />
-      )}
-      {path.length > 0 && (
-        <Polyline
-          path={path}
-          options={{
-            strokeColor: "#FF0000",
-            strokeOpacity: 1,
-            strokeWeight: 2,
-          }}
-        />
-      )}
-      <></>
-    </GoogleMap>
+    <div className="deliveryMap">
+      <GoogleMap
+        mapContainerStyle={containerStyle}
+        center={center}
+        zoom={9}
+        onLoad={onLoad}
+        onUnmount={onUnmount}
+        options={OPTIONS}
+      >
+        {source && (
+          <Marker position={{ lat: source.lat, lng: source.lng }} label="A" />
+        )}
+        {destination && (
+          <Marker
+            position={{ lat: destination.lat, lng: destination.lng }}
+            label="B"
+          />
+        )}
+        {path.length > 0 && (
+          <Polyline
+            path={path}
+            options={{
+              strokeColor: "#FF0000",
+              strokeOpacity: 1,
+              strokeWeight: 2,
+            }}
+          />
+        )}
+        <></>
+      </GoogleMap>
+    </div>
   ) : (
     <></>
   );

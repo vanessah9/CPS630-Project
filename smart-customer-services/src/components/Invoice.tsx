@@ -1,5 +1,5 @@
 import checkLogin from "@/auth/checkLogin";
-import { useEffect, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ItemsTable from "./ItemsTable";
 import DeliveryMap from "./DeliveryMap";
@@ -10,6 +10,14 @@ export default function Invoice() {
   const location = useLocation();
 
   const [invoiceItems, setInvoiceItems] = useState([]);
+  const [formValid, setFormValid] = useState(false);
+
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const form = e.currentTarget.form;
+    if (form) {
+        setFormValid(form.checkValidity());
+      } 
+  };
 
   useEffect(() => {
     const fetchInvoiceItems = async () => {
@@ -18,8 +26,6 @@ export default function Invoice() {
     };
     fetchInvoiceItems();
   }, []);
-
-//   console.log("invoice", invoiceItems)
 
   useEffect(() => {
     checkLogin(navigate, location.pathname);
@@ -32,14 +38,35 @@ export default function Invoice() {
     navigate("/orderConfirmation");
   };
 
-  const stateProps = location.state?.shippingCost;
+  const shippingCost = location.state?.shippingCost;
+  const branchLoc = location.state?.branchLoc;
 
   return (
     <div className="invoice">
       <h1 className="invoice-title">Invoice</h1>
-      <ItemsTable items={invoiceItems} isInvoice={true} shippingCost={stateProps.shippingCost} />
-      <DeliveryMap branch={"Toronto"} address={"Markham"} />
-      <div className="d-flex justify-content-center">
+      <ItemsTable
+        items={invoiceItems}
+        isInvoice={true}
+        shippingCost={shippingCost.shippingCost}
+      />
+      <h3>Delivery Route</h3>
+      <DeliveryMap branch={branchLoc.branchLoc} address={"Markham"} />
+      <form className="was-validated invoice-checkbox">
+        <div className="form-check mb-3">
+          <input
+            type="checkbox"
+            className="form-check-input"
+            id="validationFormCheck1"
+            onChange={handleInputChange}
+            required
+          />
+          <label className="form-check-label" htmlFor="validationFormCheck1">
+            I accept.
+          </label>
+          <div className="invalid-feedback">Please accept this invoice before submitting order.</div>
+        </div>
+      </form>
+      <div className="d-flex justify-content-center invoice-btns">
         <button
           type="button"
           className="btn btn-lg btn-outline-secondary btn-block m-2"
@@ -51,6 +78,7 @@ export default function Invoice() {
           type="submit"
           className="btn btn-lg btn-outline-primary btn-block m-2"
           onClick={OrderConfirmPage}
+          disabled={!formValid}
         >
           Confirm Order
         </button>
