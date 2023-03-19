@@ -49,7 +49,7 @@ export default function Navbar() {
               <NavItem text="Contact" link="./contact" dropdown={false} />
             </ul>
 
-            <div className="navbar-nav dropdown-center">
+            <div className="navbar-nav dropdown-center navbar-btns">
               <NavButton
                 icon={ShoppingCart}
                 dropdown_items={[
@@ -65,13 +65,12 @@ export default function Navbar() {
                 ]}
               />
             </div>
-            {(location.pathname != "/login" &&
-              location.pathname != "/signup") && (
-                <NavButton
-                  text="Sign Out"
-                  onClick={signout}
-              />
-            )}
+            <div className="navbar-nav">
+              {location.pathname != "/login" &&
+                location.pathname != "/signup" && (
+                  <NavButton text="Sign Out" onClick={signout} />
+                )}
+            </div>
           </div>
         </div>
       </nav>
