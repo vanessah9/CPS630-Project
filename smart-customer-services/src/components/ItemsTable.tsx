@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { getInvoice } from "../api/invoiceApi";
+import { getInvoice, getInvoiceItems } from "../api/invoiceApi";
 
 interface Item {
   id: number;
@@ -7,7 +7,7 @@ interface Item {
   price: number;
 }
 
-interface InputProps {  
+interface InputProps {
   items?: Item[];
   isInvoice?: Boolean;
   shippingCost?: number;
@@ -19,6 +19,7 @@ export default function ItemsTable({
   isInvoice,
   shippingCost = 0,
 }: InputProps) {
+
   // const [invoice, setInvoice] = useState([]);
 
   // useEffect(() => {
@@ -32,13 +33,28 @@ export default function ItemsTable({
   // console.log('Hi', invoice)
 
   // { items }: InputProps
-
-  let data: Item[] = JSON.parse(sessionStorage.getItem("items") || "[]");
+  const item: Item[] = [
+    {
+      id: 1,
+      name: "item 1",
+      price: 0,
+    },
+    {
+      id: 2,
+      name: "item 2",
+      price: 0,
+    },
+    {
+      id: 3,
+      name: "item 3",
+      price: 10,
+    },
+  ];
 
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {
-    const total = data.reduce(
+    const total = items.reduce(
       (accumulator, currentItem) => accumulator + currentItem.price,
       0
     );
@@ -50,7 +66,7 @@ export default function ItemsTable({
     currency: "CAD",
   });
 
-  const rows = data.map((item) => (
+  const rows = items.map((item) => (
     <tr key={item.id}>
       <td>{item.name}</td>
       <td>{"$" + item.price}</td>

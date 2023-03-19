@@ -1,12 +1,25 @@
 import checkLogin from "@/auth/checkLogin";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ItemsTable from "./ItemsTable";
-// import DeliveryMap from "./DeliveryMap";
+import DeliveryMap from "./DeliveryMap";
+import { getInvoiceItems } from "@/api/invoiceApi";
 
 export default function Invoice() {
   const navigate = useNavigate();
   const location = useLocation();
+
+  const [invoiceItems, setInvoiceItems] = useState([]);
+
+  useEffect(() => {
+    const fetchInvoiceItems = async () => {
+      const invoiceData = await getInvoiceItems();
+      setInvoiceItems(invoiceData);
+    };
+    fetchInvoiceItems();
+  }, []);
+
+//   console.log("invoice", invoiceItems)
 
   useEffect(() => {
     checkLogin(navigate, location.pathname);
@@ -24,8 +37,8 @@ export default function Invoice() {
   return (
     <div className="invoice">
       <h1 className="invoice-title">Invoice</h1>
-      <ItemsTable isInvoice={true} shippingCost={stateProps.shippingCost} />
-      {/* <DeliveryMap branch={"Toronto"} address={"Markham"}/> */}
+      <ItemsTable items={invoiceItems} isInvoice={true} shippingCost={stateProps.shippingCost} />
+      <DeliveryMap branch={"Toronto"} address={"Markham"} />
       <div className="d-flex justify-content-center">
         <button
           type="button"
