@@ -2,9 +2,17 @@ import User from "@/assets/icons/user.svg";
 import ShoppingCart from "@/assets/icons/shopping-cart.svg";
 import NavItem from "./NavItem";
 import NavButton from "./NavButton";
-
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function Navbar() {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  function signout() {
+    localStorage.removeItem("token");
+    navigate("/login");
+  }
+
   return (
     <div className="Navbar">
       <nav className="navbar navbar-expand-lg fixed-top shadow">
@@ -56,6 +64,10 @@ export default function Navbar() {
                 ]}
               />
             </div>
+            {(location.pathname != "/login" &&
+              location.pathname != "/signup") && (
+              <button className="signout_btn" onClick={signout}>Signout</button>
+            )}
           </div>
         </div>
       </nav>

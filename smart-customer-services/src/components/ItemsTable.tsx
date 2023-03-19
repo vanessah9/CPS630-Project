@@ -7,7 +7,7 @@ interface Item {
   price: number;
 }
 
-interface InputProps {
+interface InputProps {  
   items?: Item[];
   isInvoice?: Boolean;
   shippingCost?: number;
@@ -19,7 +19,6 @@ export default function ItemsTable({
   isInvoice,
   shippingCost = 0,
 }: InputProps) {
-
   // const [invoice, setInvoice] = useState([]);
 
   // useEffect(() => {
@@ -33,23 +32,8 @@ export default function ItemsTable({
   // console.log('Hi', invoice)
 
   // { items }: InputProps
-  const data: Item[] = [
-    {
-      id: 1,
-      name: "item 1",
-      price: 0,
-    },
-    {
-      id: 2,
-      name: "item 2",
-      price: 0,
-    },
-    {
-      id: 3,
-      name: "item 3",
-      price: 10,
-    },
-  ];
+
+  let data: Item[] = JSON.parse(sessionStorage.getItem("items") || "[]");
 
   const [totalPrice, setTotalPrice] = useState(0);
 

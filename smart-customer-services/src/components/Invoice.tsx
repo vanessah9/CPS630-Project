@@ -1,11 +1,16 @@
+import checkLogin from "@/auth/checkLogin";
+import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ItemsTable from "./ItemsTable";
-import DeliveryMap from "./DeliveryMap";
-
+// import DeliveryMap from "./DeliveryMap";
 
 export default function Invoice() {
-  const location = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    checkLogin(navigate, location.pathname);
+  }, [navigate, location.pathname]);
 
   const back = () => {
     navigate("/checkout");
@@ -20,7 +25,7 @@ export default function Invoice() {
     <div className="invoice">
       <h1 className="invoice-title">Invoice</h1>
       <ItemsTable isInvoice={true} shippingCost={stateProps.shippingCost} />
-      <DeliveryMap branch={"Toronto"} address={"Markham"}/>
+      {/* <DeliveryMap branch={"Toronto"} address={"Markham"}/> */}
       <div className="d-flex justify-content-center">
         <button
           type="button"

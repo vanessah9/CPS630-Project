@@ -10,6 +10,7 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Invoice from "./components/Invoice";
 import OrderConfirmation from "./components/OrderConfirmation";
+import Shopping from './components/Shopping';
 
 function App() {
   return (
@@ -30,7 +31,8 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/invoice" element={<Invoice />} />
             <Route path="/orderConfirmation" element={<OrderConfirmation />} />
-          </Routes>
+            <Route path="/services-shopping" element={<Shopping />} />
+           </Routes>
         </div>
       </div>
     </Router>
