@@ -6,7 +6,7 @@ import {
 } from "@react-google-maps/api";
 import { memo, useCallback, useEffect, useState } from "react";
 import Geocode from "react-geocode";
-import { getUser } from "@/api/userApi";
+import { getUsers } from "@/api/userApi";
 
 interface InputProps {
   branch: string;

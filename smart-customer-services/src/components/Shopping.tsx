@@ -1,5 +1,6 @@
 import { useState } from "react";
 import ShoppingItem from "./ShoppingItem";
+import ShoppingCart from "@/assets/icons/shopping-cart.svg";
 
 const data = [
   {
@@ -13,7 +14,6 @@ const data = [
     price: 50,
   },
 ];
-
 
 export default function Shopping() {
   const [dragging, setDragging] = useState(false);
@@ -52,9 +52,11 @@ export default function Shopping() {
     setCartCount((prev) => prev + 1);
   }
 
-  return (  
-    <div className="">
-      <h1>Shoes</h1>
+  return (
+    <div className="shopping">
+      <div className="shopping-title">
+        <h1>Shopping</h1>
+      </div>
       <div
         {...landingProps}
         style={{
@@ -64,6 +66,14 @@ export default function Shopping() {
         className="shopping-cart"
       >
         <div className="shopping-cart__count">{cartCount}</div>
+        <img
+          src={ShoppingCart}
+          className="shopping-cart__icon"
+          style={{
+            width: dragging ? "100px" : "50px",
+            height: dragging ? "100px" : "50px",
+          }}
+        />
       </div>
       {data.map((item) => (
         <div {...dragProps} id={item.id}>

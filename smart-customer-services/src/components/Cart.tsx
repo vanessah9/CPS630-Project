@@ -24,15 +24,16 @@ export default function Cart() {
     checkLogin(navigate, location.pathname);
   }, [navigate, location.pathname]);
   let items = JSON.parse(sessionStorage.getItem("items") || "[]");
-  
+
   return (
     <div>
       <h1>Cart</h1>
       <ItemsTable items={items} />
-      <Link to="/checkout">
+      <Link to={items.length > 0 ? '/checkout' : ''}>
         <button
           type="button"
           className="checkout-btn btn btn-outline-primary btn-lg"
+          disabled={items.length <= 0}
         >
           Checkout
         </button>

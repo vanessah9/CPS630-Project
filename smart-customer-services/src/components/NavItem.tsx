@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 interface InputProps {
   text: string;
   link?: string;
@@ -14,21 +16,23 @@ export default function NavItem({
   if (!dropdown) {
     return (
       <li className="nav-item">
-        <a className="nav-link" aria-current="page" href={link}>
+        <Link to={link ?? ""} className="nav-link" aria-current="page">
           {text}
-        </a>
+        </Link>
       </li>
     );
   } else {
+
     let itemList;
+    
     if (dropdown_items) {
       itemList = dropdown_items.map((item, index) => {
         return (
           <>
             <li key={index}>
-              <a className="dropdown-item" href={item[1]}>
+              <Link className="dropdown-item" to={item[1]}>
                 {item[0]}
-              </a>
+              </Link>
             </li>
             {index < dropdown_items.length - 1 && (
               <li>
@@ -39,17 +43,18 @@ export default function NavItem({
         );
       });
     }
+
     return (
       <li className="nav-item dropdown-center">
-        <a
+        <Link
           className="nav-link dropdown-toggle"
-          href="#"
+          to="#"
           role="button"
           data-bs-toggle="dropdown"
           aria-expanded="false"
         >
           {text}
-        </a>
+        </Link>
         <ul className="dropdown-menu dropdown-menu-end">{itemList}</ul>
       </li>
     );

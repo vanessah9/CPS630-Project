@@ -3,6 +3,7 @@ import ShoppingCart from "@/assets/icons/shopping-cart.svg";
 import NavItem from "./NavItem";
 import NavButton from "./NavButton";
 import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default function Navbar() {
   const navigate = useNavigate();
@@ -17,9 +18,9 @@ export default function Navbar() {
     <div className="Navbar">
       <nav className="navbar navbar-expand-lg fixed-top shadow">
         <div className="container-fluid">
-          <a className="navbar-brand" href="#landing">
+          <Link to="/" className="navbar-brand">
             SCS
-          </a>
+          </Link>
           <button
             className="navbar-toggler"
             type="button"
@@ -34,14 +35,14 @@ export default function Navbar() {
 
           <div className="collapse navbar-collapse" id="navbarSupportedContent">
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-              <NavItem text="Home" link="#landing" dropdown={false} />
-              <NavItem text="About" link="#about" dropdown={false} />
+              <NavItem text="Home" link="/" dropdown={false} />
+              <NavItem text="About" link="/" dropdown={false} />
               <NavItem
                 text="Services"
                 dropdown={true}
                 dropdown_items={[
-                  ["Online Shopping", "#services-shopping"],
-                  ["Delivery", "#services-delivery"],
+                  ["Online Shopping", "/services-shopping"],
+                  ["Delivery", "/services-delivery"],
                 ]}
               />
               <NavItem text="Reviews" link="./reviews" dropdown={false} />
