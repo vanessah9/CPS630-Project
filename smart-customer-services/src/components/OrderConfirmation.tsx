@@ -10,5 +10,5 @@ export default function OrderConfirmations() {
     checkLogin(navigate, location.pathname);
   }, [navigate, location.pathname]);
 
-  return <div className="">Order Confirmed</div>;
+  return <div className="">Thank you for ordering! It will arrive by {}</div>;
 }
