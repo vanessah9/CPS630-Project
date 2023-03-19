@@ -1,0 +1,20 @@
+.reviews{
+    &-title{
+        color: $primary;
+        text-align: center;
+        font-size: $title;
+    }
+
+    &-item{
+        border-radius: 10px;
+        padding: 10px;
+        margin: 10px;
+        &__title{
+            font-size: $item-title;
+            font-weight: bold;
+        }
+        &__content{
+            color: blue;
+        }
+    }
+}
