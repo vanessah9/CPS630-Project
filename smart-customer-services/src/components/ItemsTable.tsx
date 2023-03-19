@@ -28,7 +28,7 @@ export default function ItemsTable({
       0
     );
     setTotalPrice(total + shippingCost);
-  }, []);
+  }, [items, shippingCost]);
 
   const formattedPrice = totalPrice.toLocaleString("en-US", {
     style: "currency",

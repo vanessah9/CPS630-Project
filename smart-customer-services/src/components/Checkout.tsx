@@ -7,46 +7,61 @@ export default function Checkout() {
   const navigate = useNavigate();
   const location = useLocation();
 
+  const [selectedOption, setSelectedOption] = useState("");
+  const [shippingCost, setShippingCost] = useState<number>(0);
+  const [branchLoc, setBranchLoc] = useState("");
+  const [estimateDelivery, setEstimateDelivery] = useState<Date | null>(null);
+  const [formValid, setFormValid] = useState(false);
+
   useEffect(() => {
     checkLogin(navigate, location.pathname);
   }, [navigate, location.pathname]);
 
   const invoicePage = () => {
-    navigate("/invoice", { state: { shippingCost: { shippingCost } } });
-  };
-
-  const [selectedOption, setSelectedOption] = useState("");
-  const [shippingCost, setShippingCost] = useState<number>(0);
-  const [estimateDelivery, setEstimateDelivery] = useState<Date | null>(null);
+    navigate("/invoice", {
+      state: { shippingCost: { shippingCost }, branchLoc: { branchLoc } },
+    });
+  }
 
   const handleOptionChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const form = e.currentTarget.form;
+
+    if (form) {
+      setFormValid(form.checkValidity());
+    } 
+
     const selected = e.target.value;
     setSelectedOption(selected);
 
     let daysToAdd = 0;
     let hoursToAdd = 0;
     let shipping = 0;
+    let branch = "";
 
     switch (selected) {
       case "toronto":
         daysToAdd = 1;
         hoursToAdd = 5;
         shipping = 10;
+        branch = "350 Victoria St, Toronto, ON M5B 2K3"
         break;
       case "brampton":
         daysToAdd = 3;
         hoursToAdd = 10;
         shipping = 12;
+        branch = "27 Church St W, Brampton, ON L6X 1H2"
         break;
       case "markham":
         daysToAdd = 5;
         hoursToAdd = 5;
         shipping = 15;
+        branch = "Main Street Markham N, Markham, ON L3P 1Y6"
         break;
       default:
         daysToAdd = 0;
         hoursToAdd = 0;
         shipping = 0;
+        branch = "";
     }
 
     const currentDate = new Date();
@@ -58,6 +73,8 @@ export default function Checkout() {
 
     setEstimateDelivery(deliveryDate);
     setShippingCost(shipping);
+    setBranchLoc(branch);
+    console.log(branch)
   };
 
   return (
@@ -104,6 +121,7 @@ export default function Checkout() {
         type="button"
         className="checkout-btn btn btn-outline-primary btn-lg"
         onClick={invoicePage}
+        disabled={!formValid}
       >
         Next
       </button>
