@@ -63,26 +63,31 @@ export default function Checkout() {
   return (
     <div className="checkout">
       <h1 className="checkout-title">Checkout</h1>
-      <p className="checkout-text">Review Cart Items</p>
-      <ItemsTable shippingCost={shippingCost} />
+      {/* <p className="checkout-text">Review Cart Items</p> */}
+      {/* <ItemsTable shippingCost={shippingCost} /> */}
       <h1 className="checkout-small-title">Delivery</h1>
       <p className="checkout-text">Select Branch Location</p>
-      <div className="form-floating checkout-branch-select">
-        <select
-          value={selectedOption || ""}
-          className="form-select"
-          id="branchSelection"
-          onChange={handleOptionChange}
-        >
-          <option value="" disabled>
-            Select an option
-          </option>
-          <option value="toronto">Toronto</option>
-          <option value="brampton">Brampton</option>
-          <option value="markham">Markham</option>
-        </select>
-        <label htmlFor="branchSelection">Branch</label>
-      </div>
+      <form className="was-validated">
+        <div className="mb-3 form-floating checkout-branch-select">
+          <select
+            value={selectedOption || ""}
+            className="form-select"
+            id="branchSelection"
+            onChange={handleOptionChange}
+            required
+          >
+            <option value="" selected disabled>
+              Select an option
+            </option>
+            <option value="toronto">Toronto</option>
+            <option value="brampton">Brampton</option>
+            <option value="markham">Markham</option>
+          </select>
+          <label htmlFor="branchSelection">Branch</label>
+          <div className="invalid-feedback">Please select a branch.</div>
+        </div>
+      </form>
+
       {estimateDelivery && (
         <p className="checkout-subtitle">
           <strong>Estimated Delivery: </strong>
