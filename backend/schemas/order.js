@@ -1,8 +1,17 @@
 const Joi = require("joi");
 
+const coordinatePayload = Joi.object({
+  lng: Joi.number().required(),
+  lat: Joi.number().required(),
+}).required();
+
 const orderPayload = Joi.object({
-  tripId: Joi.string().required(),
-  receiptId: Joi.string().required(),
+  sourceCode: Joi.string().required(),
+  location: coordinatePayload,
+  destination: coordinatePayload,
+  storeCode: Joi.string().required(),
+  paymentMethod: Joi.string().required(),
+  items: Joi.array().items(Joi.string()).min(1).required(),
   paymentMethod: Joi.string().required(),
 });
 
