@@ -8,7 +8,7 @@ interface Item {
 }
 
 interface InputProps {
-  items?: Item[];
+  items: Item[];
   isInvoice?: Boolean;
   shippingCost?: number;
   // change to not optional later
@@ -19,37 +19,6 @@ export default function ItemsTable({
   isInvoice,
   shippingCost = 0,
 }: InputProps) {
-
-  // const [invoice, setInvoice] = useState([]);
-
-  // useEffect(() => {
-  //   const fetchInvoice= async () => {
-  //     const invoiceData = await getInvoice();
-  //     setInvoice(invoiceData);
-  //   };
-  //   fetchInvoice();
-  // }, []);
-
-  // console.log('Hi', invoice)
-
-  // { items }: InputProps
-  const item: Item[] = [
-    {
-      id: 1,
-      name: "item 1",
-      price: 0,
-    },
-    {
-      id: 2,
-      name: "item 2",
-      price: 0,
-    },
-    {
-      id: 3,
-      name: "item 3",
-      price: 10,
-    },
-  ];
 
   const [totalPrice, setTotalPrice] = useState(0);
 

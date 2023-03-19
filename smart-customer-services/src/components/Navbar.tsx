@@ -61,13 +61,16 @@ export default function Navbar() {
                 icon={User}
                 dropdown_items={[
                   ["Login", "./login"],
-                  ["Signup", "./signup"],
+                  ["Sign Up", "./signup"],
                 ]}
               />
             </div>
             {(location.pathname != "/login" &&
               location.pathname != "/signup") && (
-              <button className="signout_btn" onClick={signout}>Signout</button>
+                <NavButton
+                  text="Sign Out"
+                  onClick={signout}
+              />
             )}
           </div>
         </div>

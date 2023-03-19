@@ -1,9 +1,11 @@
 interface InputProps {
-  dropdown_items: string[][];
-  icon: string;
+  dropdown_items?: string[][];
+  icon?: string;
+  text?: string;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-export default function NavButton({ dropdown_items, icon }: InputProps) {
+export default function NavButton({ dropdown_items, icon, text, onClick }: InputProps) {
   let itemList;
   if (dropdown_items) {
     itemList = dropdown_items.map((item, index) => {
@@ -22,6 +24,18 @@ export default function NavButton({ dropdown_items, icon }: InputProps) {
         </>
       );
     });
+  }
+
+  if (text) {
+    return (
+      <button
+      className="btn btn-warning"
+      type="button"
+      onClick={onClick}
+    >
+      {text}
+    </button>
+    )
   }
   return (
     <>

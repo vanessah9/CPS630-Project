@@ -29,10 +29,10 @@ export default function Cart() {
     <div>
       <h1>Cart</h1>
       <ItemsTable items={items} />
-      <Link to={items.length > 0 ? '/checkout' : ''}>
+      <Link style={{ textDecoration: 'none' }} to={items.length > 0 ? "/checkout" : ""}>
         <button
           type="button"
-          className="checkout-btn btn btn-outline-primary btn-lg"
+          className={items.length > 0 ? "checkout-btn btn btn-outline-primary btn-lg" : "checkout-btn btn btn-outline-secondary btn-lg" }
           disabled={items.length <= 0}
         >
           Checkout
