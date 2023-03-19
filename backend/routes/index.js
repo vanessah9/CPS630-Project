@@ -1,4 +1,4 @@
-module.exports = function (app, mongoose) {
+module.exports = function (app) {
   require("./user")(app);
   require("./item")(app);
   require("./shopping").routes(app);

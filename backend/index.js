@@ -13,6 +13,6 @@ app.use(cors());
 
 mongoose.connect(process.env.CONNECTION_STRING);
 
-require("./routes")(app, mongoose);
+require("./routes")(app);
 
 app.listen(PORT);
