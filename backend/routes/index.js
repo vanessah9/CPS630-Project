@@ -4,5 +4,5 @@ module.exports = function (app, mongoose) {
   require("./shopping")(app, mongoose);
   require("./truck")(app);
   require("./trip")(app, mongoose);
-  require("./order");
+  require("./order")(app);
 };

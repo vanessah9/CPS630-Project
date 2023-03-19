@@ -81,3 +81,44 @@ module.exports = function (app, mongoose) {
     }
   });
 };
+
+async function createInvoice(user, items, paymentMethod, storeCode) {
+  let itemsInfo;
+
+  try {
+    itemsInfo = await Items.find({
+      _id: { $in: items },
+    });
+
+    let totalPrice = 0;
+
+    itemsInfo.forEach((item) => {
+      totalPrice += item.price;
+    });
+
+    totalPrice *= 1.13;
+
+    totalPrice = Number(totalPrice.toFixed(2));
+
+    const itemsPayload = items.map((item) => {
+      return new mongoose.Types.ObjectId(item);
+    });
+
+    const userId = new mongoose.Types.ObjectId(user.id);
+
+    const invoice = await Shopping.create({
+      userId: userId,
+      itemId: itemsPayload,
+      storeCode,
+      paymentMethod,
+      totalPrice,
+      time: new Date().getTime(),
+    });
+
+    return { invoiceId: invoice._id, totalPrice };
+  } catch (e) {
+    return { error: e.message };
+  }
+}
+
+exports.createInvoice = createInvoice;
