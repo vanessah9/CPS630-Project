@@ -1,10 +1,16 @@
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import ItemsTable from "./ItemsTable";
-import { ChangeEvent, useState } from "react";
-
+import { ChangeEvent, useEffect, useState } from "react";
+import checkLogin from "@/auth/checkLogin";
 
 export default function Checkout() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    checkLogin(navigate, location.pathname);
+  }, [navigate, location.pathname]);
+
   const invoicePage = () => {
     navigate("/invoice", { state: { shippingCost: { shippingCost } } });
   };

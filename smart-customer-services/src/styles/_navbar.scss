@@ -11,6 +11,19 @@
   }
 }
 
+.signout_btn {
+  color: white;
+  border: none;
+  background-color: #02785d;
+  font-weight: bold;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.signout_btn:hover {
+  background-color: #157347;
+}
+
 .dropdown-menu {
   background-color: #02785d;
 

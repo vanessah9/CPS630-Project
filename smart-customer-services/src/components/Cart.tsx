@@ -16,7 +16,6 @@ const data = [
     price: 50,
   },
 ];
-
 export default function Cart() {
   const navigate = useNavigate();
   const location = useLocation();
@@ -24,9 +23,8 @@ export default function Cart() {
   useEffect(() => {
     checkLogin(navigate, location.pathname);
   }, [navigate, location.pathname]);
-
-
   let items = JSON.parse(sessionStorage.getItem("items") || "[]");
+  
   return (
     <div>
       <h1>Cart</h1>
