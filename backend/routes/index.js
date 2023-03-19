@@ -1,8 +1,8 @@
-module.exports = function (app, mongoose) {
+module.exports = function (app) {
   require("./user")(app);
   require("./item")(app);
-  require("./shopping")(app, mongoose);
+  require("./shopping").routes(app);
   require("./truck")(app);
-  require("./trip")(app, mongoose);
-  require("./order");
+  require("./trip").routes(app);
+  require("./order")(app);
 };
