@@ -4,14 +4,29 @@ import ShoppingCart from "@/assets/icons/shopping-cart.svg";
 
 const data = [
   {
-    id: "1",
-    name: "Nike Air Max",
-    price: 40,
+    id: "3",
+    name: "Adidas Ultraboost",
+    price: 120,
   },
   {
-    id: "2",
-    name: "Nike Panda Dunk",
-    price: 50,
+    id: "4",
+    name: "Vans Old Skool",
+    price: 60,
+  },
+  {
+    id: "5",
+    name: "Converse Chuck Taylor All Star",
+    price: 55,
+  },
+  {
+    id: "6",
+    name: "Puma Suede Classic",
+    price: 70,
+  },
+  {
+    id: "7",
+    name: "New Balance 990v5",
+    price: 175,
   },
 ];
 
