@@ -12,9 +12,11 @@
 }
 
 .about {
-  &-desc {
+  #about-desc {
     padding: 0px 30px;
     text-align: center;
+    font-size: large;
+    font-weight: 500;
   }
 }
 
