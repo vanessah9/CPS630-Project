@@ -6,11 +6,8 @@ const coordinatePayload = Joi.object({
 }).required();
 
 const orderPayload = Joi.object({
-  sourceCode: Joi.string().required(),
-  location: coordinatePayload,
-  destination: coordinatePayload,
-  storeCode: Joi.string().required(),
-  items: Joi.array().items(Joi.string()).min(1).required(),
+  tripId: Joi.string().required(),
+  invoiceId: Joi.string().required(),
   paymentMethod: Joi.string().required(),
 });
 
