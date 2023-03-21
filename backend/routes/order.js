@@ -19,30 +19,9 @@ module.exports = function (app) {
       return res.status(400).json({ error: error.message });
     }
 
-    const {
-      sourceCode,
-      location,
-      destination,
-      storeCode,
-      items,
-      paymentMethod,
-    } = value;
+    const { invoiceId, tripId, paymentMethod } = value;
 
     try {
-      const { invoiceId } = await createInvoice(
-        user,
-        items,
-        paymentMethod,
-        storeCode
-      );
-
-      const { tripId } = await createTrip(
-        user,
-        sourceCode,
-        location,
-        destination
-      );
-
       const order = await Order.create({
         userId: new mongoose.Types.ObjectId(user.id),
         tripId: new mongoose.Types.ObjectId(tripId),
@@ -50,9 +29,13 @@ module.exports = function (app) {
         paymentMethod,
       });
 
-      return res.status(200).json({ data: order._id });
+      return res.status(200).json({ data: { id: order._id } });
     } catch (e) {
       return res.status(400).json({ error: "Order couldn't be fulfilled" });
     }
   });
+
+  app.get("/order", verifyJWT, async (req, res) => {});
+
+  app.get("/order/:id", verifyJWT, async (req, res) => {});
 };

@@ -30,13 +30,15 @@ module.exports = {
       );
 
       if (tripPrice) {
-        return res.status(200).json({ data: { tripId, price: tripPrice } });
+        return res.status(200).json({ data: { id: tripId, price: tripPrice } });
       } else {
         return res.status(400).json({ error: "A trip couldn't be organized" });
       }
     });
 
     app.get("/trip", verifyJWT, async (req, res) => {});
+
+    app.get("/trip/:tripId", verifyJWT, async (req, res) => {});
   },
   createTrip,
 };
