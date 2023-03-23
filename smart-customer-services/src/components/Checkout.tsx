@@ -13,22 +13,28 @@ export default function Checkout() {
   const [estimateDelivery, setEstimateDelivery] = useState<Date | null>(null);
   const [formValid, setFormValid] = useState(false);
 
+  const cartItems = location.state?.cartItems;
+
   useEffect(() => {
     checkLogin(navigate, location.pathname);
   }, [navigate, location.pathname]);
 
   const invoicePage = () => {
     navigate("/invoice", {
-      state: { shippingCost: { shippingCost }, branchLoc: { branchLoc } },
+      state: {
+        shippingCost: { shippingCost },
+        branchLoc: { branchLoc },
+        cartItems: { cartItems },
+      },
     });
-  }
+  };
 
   const handleOptionChange = (e: ChangeEvent<HTMLSelectElement>) => {
     const form = e.currentTarget.form;
 
     if (form) {
       setFormValid(form.checkValidity());
-    } 
+    }
 
     const selected = e.target.value;
     setSelectedOption(selected);
@@ -43,19 +49,19 @@ export default function Checkout() {
         daysToAdd = 1;
         hoursToAdd = 5;
         shipping = 10;
-        branch = "350 Victoria St, Toronto, ON M5B 2K3"
+        branch = "350 Victoria St, Toronto, ON M5B 2K3";
         break;
       case "brampton":
         daysToAdd = 3;
         hoursToAdd = 10;
         shipping = 12;
-        branch = "27 Church St W, Brampton, ON L6X 1H2"
+        branch = "27 Church St W, Brampton, ON L6X 1H2";
         break;
       case "markham":
         daysToAdd = 5;
         hoursToAdd = 5;
         shipping = 15;
-        branch = "Main Street Markham N, Markham, ON L3P 1Y6"
+        branch = "Main Street Markham N, Markham, ON L3P 1Y6";
         break;
       default:
         daysToAdd = 0;
@@ -74,7 +80,7 @@ export default function Checkout() {
     setEstimateDelivery(deliveryDate);
     setShippingCost(shipping);
     setBranchLoc(branch);
-    console.log(branch)
+    console.log(branch);
   };
 
   return (

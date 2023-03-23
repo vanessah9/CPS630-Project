@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { getInvoice, getInvoiceItems } from "../api/invoiceApi";
 
 interface Item {
-  id: number;
+  id: string;
   name: string;
   price: number;
 }
@@ -19,7 +19,6 @@ export default function ItemsTable({
   isInvoice,
   shippingCost = 0,
 }: InputProps) {
-
   const [totalPrice, setTotalPrice] = useState(0);
 
   useEffect(() => {

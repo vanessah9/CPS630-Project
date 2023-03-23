@@ -9,23 +9,15 @@ export default function Invoice() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  const [invoiceItems, setInvoiceItems] = useState([]);
   const [formValid, setFormValid] = useState(false);
+
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const form = e.currentTarget.form;
     if (form) {
-        setFormValid(form.checkValidity());
-      } 
+      setFormValid(form.checkValidity());
+    }
   };
-
-  useEffect(() => {
-    const fetchInvoiceItems = async () => {
-      const invoiceData = await getInvoiceItems();
-      setInvoiceItems(invoiceData);
-    };
-    fetchInvoiceItems();
-  }, []);
 
   useEffect(() => {
     checkLogin(navigate, location.pathname);
@@ -40,15 +32,19 @@ export default function Invoice() {
 
   const shippingCost = location.state?.shippingCost;
   const branchLoc = location.state?.branchLoc;
+  const invoiceItems = location.state?.cartItems;
 
   return (
     <div className="invoice">
       <h1 className="invoice-title">Invoice</h1>
-      <ItemsTable
-        items={invoiceItems}
-        isInvoice={true}
-        shippingCost={shippingCost.shippingCost}
-      />
+      {invoiceItems && (
+        <ItemsTable
+          items={invoiceItems.cartItems}
+          isInvoice={true}
+          shippingCost={shippingCost.shippingCost}
+        />
+      )}
+
       <h3>Delivery Route</h3>
       <DeliveryMap branch={branchLoc.branchLoc} address={"Markham"} />
       <form className="was-validated invoice-checkbox">
@@ -63,7 +59,9 @@ export default function Invoice() {
           <label className="form-check-label" htmlFor="validationFormCheck1">
             I accept.
           </label>
-          <div className="invalid-feedback">Please accept this invoice before submitting order.</div>
+          <div className="invalid-feedback">
+            Please accept this invoice before submitting order.
+          </div>
         </div>
       </form>
       <div className="d-flex justify-content-center invoice-btns">
