@@ -6,11 +6,16 @@ const shoppingSchema = new mongoose.Schema({
     required: true,
     ref: "user",
   },
-  itemId: {
-    type: [mongoose.SchemaTypes.ObjectId],
-    required: true,
-    ref: "item",
-  },
+  items: [
+    {
+      id: {
+        type: mongoose.SchemaTypes.ObjectId,
+        required: true,
+        ref: "item",
+      },
+      quantity: { type: Number, required: true },
+    },
+  ],
   storeCode: {
     type: String,
     required: true,

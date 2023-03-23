@@ -28,7 +28,7 @@ module.exports = {
       );
 
       if (invoiceId) {
-        return res.status(200).json({ data: { invoiceId, totalPrice } });
+        return res.status(200).json({ data: { id: invoiceId, totalPrice } });
       } else {
         return res.status(400).json({ error: "Couldn't create the invoice" });
       }
@@ -40,50 +40,52 @@ module.exports = {
       try {
         const invoices = await Shopping.find({ userId: user.id });
 
-        let invoicesWithItemsInfo = [];
+        let newInvoices = [];
 
         for (const invoice of invoices) {
-          const items = await Items.find({ _id: { $in: invoice._doc.itemId } });
+          let itemsInfo = [];
+          for (const item of invoice.items) {
+            const info = await Items.findOne({ _id: item.id }, { _id: 0 });
 
-          invoicesWithItemsInfo.push({ ...invoice._doc, itemId: items });
+            itemsInfo.push({ ...item._doc, item: info });
+          }
+          newInvoices.push({ ...invoice._doc, items: itemsInfo });
         }
 
-        return res.status(200).json({ data: invoicesWithItemsInfo });
+        return res.status(200).json({ data: newInvoices });
       } catch (e) {
         return res.status(400).json({ error: "No invoices in our records" });
       }
     });
+
+    app.get("/invoice/:invoiceId", verifyJWT, async (req, res) => {});
   },
   createInvoice,
 };
 
 async function createInvoice(user, items, paymentMethod, storeCode) {
-  let itemsInfo;
-
   try {
-    itemsInfo = await Items.find({
-      _id: { $in: items },
-    });
-
     let totalPrice = 0;
 
-    itemsInfo.forEach((item) => {
-      totalPrice += item.price;
-    });
+    for (const item of items) {
+      itemInfo = await Items.findOne({ _id: item.id });
+      totalPrice += itemInfo.price * item.quantity;
+    }
 
     totalPrice *= 1.13;
 
     totalPrice = Number(totalPrice.toFixed(2));
 
     const itemsPayload = items.map((item) => {
-      return new mongoose.Types.ObjectId(item);
+      const mId = new mongoose.Types.ObjectId(item.id);
+      return { ...item, id: mId };
     });
 
     const userId = new mongoose.Types.ObjectId(user.id);
 
     const invoice = await Shopping.create({
       userId: userId,
-      itemId: itemsPayload,
+      items: itemsPayload,
       storeCode,
       paymentMethod,
       totalPrice,
@@ -92,7 +94,6 @@ async function createInvoice(user, items, paymentMethod, storeCode) {
 
     return { invoiceId: invoice._id, invoicePrice: totalPrice };
   } catch (e) {
-    console.log(e);
     return { error: e.message };
   }
 }

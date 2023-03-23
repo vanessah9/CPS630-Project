@@ -62,5 +62,21 @@ module.exports = function (app) {
   app.get("/checklogin", verifyJWT, (req, res) => {
     res.status(200).json({ message: "success" });
   });
-  
+
+  app.get("/user/:id", verifyJWT, async (req, res) => {
+    try {
+      const user = req.user;
+      const userId = req.params.id;
+
+      if (user.id.toString() !== userId) {
+        return res.status(400).json({ error: "Couldn't find user" });
+      }
+
+      const userInfo = await User.findOne({ _id: userId }, { password: 0 });
+
+      return res.status(200).json({ data: userInfo });
+    } catch (e) {
+      return res.status(400).json({ error: "Couldn't find user" });
+    }
+  });
 };
