@@ -2,11 +2,7 @@ import { useState, useEffect } from "react";
 import ShoppingItem from "./ShoppingItem";
 import ShoppingCart from "@/assets/icons/shopping-cart.svg";
 import { getItems } from "@/api/itemsApi";
-
-interface SessionItem {
-  id: string;
-  quantity: number;
-}
+import { SessionItem } from "@/models/Shopping";
 
 export default function Shopping() {
   let sessionArray = JSON.parse(sessionStorage.getItem("items") || "[]");
