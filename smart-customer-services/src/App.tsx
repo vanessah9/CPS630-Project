@@ -11,6 +11,7 @@ import Checkout from "./components/Checkout";
 import Invoice from "./components/Invoice";
 import OrderConfirmation from "./components/OrderConfirmation";
 import Shopping from './components/Shopping';
+import Profile from './components/Profile';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
             <Route path="/invoice" element={<Invoice />} />
             <Route path="/orderConfirmation" element={<OrderConfirmation />} />
             <Route path="/services-shopping" element={<Shopping />} />
+            <Route path="/profile" element={<Profile />} />
            </Routes>
         </div>
       </div>
