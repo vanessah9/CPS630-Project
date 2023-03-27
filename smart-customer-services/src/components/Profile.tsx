@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import checkLogin from "@/auth/checkLogin";
+import { getLoggedInUser } from "@/api/userApi";
 
 export default function Profile() {
   const navigate = useNavigate();
@@ -10,6 +11,23 @@ export default function Profile() {
 
   const [browserName, setBrowserName] = useState("");
 
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNo: "",
+    address: "",
+    city: "",
+  });
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  const fetchUser = async () => {
+    const user = await getLoggedInUser();
+    setUser(user);
+  };
   useEffect(() => {
     let userAgent = navigator.userAgent;
     if (userAgent.includes("Chrome")) {
@@ -25,15 +43,18 @@ export default function Profile() {
     }
   }, [browserName]);
 
+  useEffect(() => {}, [browserName]);
   return (
     <div>
-      <h1>Welcome Back, USERNAME_HERE</h1>
+      <h1>
+        Welcome Back, {user.firstName} {user.lastName}
+      </h1>
       <div>
         <h2>Account Information</h2>
-        <div>Email: </div>
-        <div>Phone Number: </div>
-        <div>Address: </div>
-        <div>Country: </div>
+        <div>Email: {user.email}</div>
+        <div>Phone Number: {user.phoneNo}</div>
+        <div>Address: {user.address}</div>
+        <div>City: {user.city}</div>
         <div>Powered by {browserName}</div>
       </div>
       <div>
