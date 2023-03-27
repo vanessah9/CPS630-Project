@@ -6,6 +6,7 @@ const User = require("../models/user");
 const createJWT = require("../libs/createJWT");
 
 const verifyJWT = require("../middleware/verifyJWT");
+const verifyAdmin = require("../middleware/verifyAdmin");
 
 module.exports = function (app) {
   app.post("/login", async (req, res) => {
@@ -63,6 +64,10 @@ module.exports = function (app) {
     res.status(200).json({ message: "success" });
   });
 
+  app.get("/checkadmin", [verifyJWT, verifyAdmin], (req, res) => {
+    res.status(200).json({ message: "success" });
+  });
+
   app.get("/user/:id", verifyJWT, async (req, res) => {
     try {
       const user = req.user;
@@ -78,5 +83,19 @@ module.exports = function (app) {
     } catch (e) {
       return res.status(400).json({ error: "Couldn't find user" });
     }
+  });
+
+  router.get("/user/me", verifyJWT, (req, res) => {
+    User.findById(req.user.id)
+      .then((user) => {
+        if (user) {
+          res.status(200).json(user);
+        } else {
+          res.status(404).json({ message: "User not found" });
+        }
+      })
+      .catch((err) => {
+        res.status(500).json({ message: "Error finding user", error: err });
+      });
   });
 };

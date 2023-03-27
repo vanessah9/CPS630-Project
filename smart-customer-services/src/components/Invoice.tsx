@@ -11,6 +11,13 @@ export default function Invoice() {
 
   const [formValid, setFormValid] = useState(false);
 
+  const [cardNumber, setCardNumber] = useState("");
+
+  const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
+    // todo: add payment validation here
+    setCardNumber(e.target.value);
+  };
+
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const form = e.currentTarget.form;
     if (form) {
@@ -52,6 +59,18 @@ export default function Invoice() {
         address={userCoords.userCoords}
       />
       <form className="was-validated invoice-checkbox">
+        <div>
+          <label htmlFor="ccn">Credit Card Number:</label>
+          <input
+            id="ccn"
+            type="tel"
+            value={cardNumber}
+            onChange={handleCardNumberChange}
+            pattern="[0-9\s]{13,19}"
+            maxLength={19}
+            placeholder="xxxx xxxx xxxx xxxx"
+          />
+        </div>
         <div className="form-check mb-3">
           <input
             type="checkbox"

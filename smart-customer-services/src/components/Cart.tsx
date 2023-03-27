@@ -4,11 +4,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import ItemsTable from "./ItemsTable";
 import { Link } from "react-router-dom";
 import { getItems } from "@/api/itemsApi";
-
-interface SessionItem {
-  id: string;
-  quantity: number;
-}
+import { SessionItem } from "@/models/Shopping";
 
 export default function Cart() {
   const navigate = useNavigate();
