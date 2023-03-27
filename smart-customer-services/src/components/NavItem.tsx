@@ -1,3 +1,4 @@
+import React from "react";
 import { Link } from "react-router-dom";
 
 interface InputProps {
@@ -28,8 +29,8 @@ export default function NavItem({
     if (dropdown_items) {
       itemList = dropdown_items.map((item, index) => {
         return (
-          <>
-            <li key={index}>
+          <React.Fragment key={index}>
+            <li>
               <Link className="dropdown-item" to={item[1]}>
                 {item[0]}
               </Link>
@@ -39,7 +40,7 @@ export default function NavItem({
                 <hr className="dropdown-divider" />
               </li>
             )}
-          </>
+          </React.Fragment>
         );
       });
     }
