@@ -10,8 +10,9 @@ import Cart from "./components/Cart";
 import Checkout from "./components/Checkout";
 import Invoice from "./components/Invoice";
 import OrderConfirmation from "./components/OrderConfirmation";
-import Shopping from './components/Shopping';
-import Profile from './components/Profile';
+import Shopping from "./components/Shopping";
+import Profile from "./components/Profile";
+import AdminControllPanel from "./components/AdminControllPanel";
 
 function App() {
   return (
@@ -34,7 +35,8 @@ function App() {
             <Route path="/orderConfirmation" element={<OrderConfirmation />} />
             <Route path="/services-shopping" element={<Shopping />} />
             <Route path="/profile" element={<Profile />} />
-           </Routes>
+            <Route path="/admin" element={<AdminControllPanel />}></Route>
+          </Routes>
         </div>
       </div>
     </Router>
