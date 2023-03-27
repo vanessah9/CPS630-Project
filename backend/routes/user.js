@@ -85,7 +85,7 @@ module.exports = function (app) {
     }
   });
 
-  router.get("/user/me", verifyJWT, (req, res) => {
+  app.get("/user/me", verifyJWT, (req, res) => {
     User.findById(req.user.id)
       .then((user) => {
         if (user) {
