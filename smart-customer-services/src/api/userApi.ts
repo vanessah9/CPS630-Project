@@ -1,12 +1,17 @@
-import axiosClient from './axiosClient';
+import axiosClient from "./axiosClient";
 
 export const getUsers = async () => {
-  const response = await axiosClient.get('/users');
+  const response = await axiosClient.get("/users");
   return response.data;
 };
 
 export const getUserById = async (id: number) => {
   const response = await axiosClient.get(`/users/${id}`);
+  return response.data;
+};
+
+export const getLoggedInUser = async () => {
+  const response = await axiosClient.get("/users/me");
   return response.data;
 };
 
