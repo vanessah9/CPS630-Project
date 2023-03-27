@@ -9,8 +9,8 @@ import Geocode from "react-geocode";
 import { getUsers } from "@/api/userApi";
 
 interface InputProps {
-  branch: string;
-  address: string;
+  branch: LatLng;
+  address: LatLng;
 }
 
 interface LatLng {
@@ -22,6 +22,8 @@ const APIKEY = import.meta.env.VITE_GOOGLE_KEY;
 Geocode.setApiKey(APIKEY!);
 
 function DeliveryMap({ branch, address }: InputProps) {
+  console.log("address", address.lat, address.lng);
+  console.log("branch", branch.lat, branch.lng);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: APIKEY!,
@@ -43,28 +45,30 @@ function DeliveryMap({ branch, address }: InputProps) {
   };
 
   useEffect(() => {
-    Geocode.fromAddress(branch).then(
-      (response) => {
-        const { lat, lng } = response.results[0].geometry.location;
-        setSource({ lat, lng });
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }, []);
+    // Geocode.fromAddress(branch).then(
+    //   (response) => {
+    //     const { lat, lng } = response.results[0].geometry.location;
+    //     setSource({ lat, lng });
+    //   },
+    //   (error) => {
+    //     console.error(error);
+    //   }
+    // );
+    setSource({lat: branch.lat, lng: branch.lng})
+    setDestination({ lat: address.lat, lng: address.lng });
+  }, [branch, address]);
 
-  useEffect(() => {
-    Geocode.fromAddress(address).then(
-      (response) => {
-        const { lat, lng } = response.results[0].geometry.location;
-        setDestination({ lat, lng });
-      },
-      (error) => {
-        console.error(error);
-      }
-    );
-  }, []);
+  // useEffect(() => {
+  //   Geocode.fromAddress(address).then(
+  //     (response) => {
+  //       const { lat, lng } = response.results[0].geometry.location;
+  //       setDestination({ lat, lng });
+  //     },
+  //     (error) => {
+  //       console.error(error);
+  //     }
+  //   );
+  // }, [address]);
 
   useEffect(() => {
     if (source && destination) {

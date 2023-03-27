@@ -11,7 +11,6 @@ export default function Invoice() {
 
   const [formValid, setFormValid] = useState(false);
 
-
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     const form = e.currentTarget.form;
     if (form) {
@@ -26,12 +25,14 @@ export default function Invoice() {
   const back = () => {
     navigate("/checkout");
   };
+
   const OrderConfirmPage = () => {
     navigate("/orderConfirmation");
   };
 
   const shippingCost = location.state?.shippingCost;
-  const branchLoc = location.state?.branchLoc;
+  const branchCoords = location.state?.branchCoords;
+  const userCoords = location.state?.userCoords;
   const invoiceItems = location.state?.cartItems;
 
   return (
@@ -46,7 +47,10 @@ export default function Invoice() {
       )}
 
       <h3>Delivery Route</h3>
-      <DeliveryMap branch={branchLoc.branchLoc} address={"Markham"} />
+      <DeliveryMap
+        branch={branchCoords.branchCoords}
+        address={userCoords.userCoords}
+      />
       <form className="was-validated invoice-checkbox">
         <div className="form-check mb-3">
           <input

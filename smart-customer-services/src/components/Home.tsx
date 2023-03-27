@@ -2,6 +2,7 @@ import Navbar from "./Navbar";
 import DeliveryPerson from "@/assets/images/delivery_person.svg";
 import ShoppingBag from "@/assets/icons/shopping-bag.svg";
 import Truck from "@/assets/icons/truck.svg";
+import Package from "@/assets/icons/package.svg";
 import checkLogin from "@/auth/checkLogin";
 import { useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
@@ -61,6 +62,10 @@ export default function Home() {
               <div className="col-sm">
                 <h4 className="services-subheader">Delivery</h4>
                 <img className="services-img" src={Truck} />
+              </div>
+              <div className="col-sm">
+                <h4 className="services-subheader">Past Orders</h4>
+                <img className="services-img" src={Package} />
               </div>
             </div>
           </div>

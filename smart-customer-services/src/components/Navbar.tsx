@@ -43,6 +43,7 @@ export default function Navbar() {
                 dropdown_items={[
                   ["Online Shopping", "/services-shopping"],
                   ["Delivery", "/services-delivery"],
+                  ["Past Orders", "/past-orders"],
                 ]}
               />
               <NavItem text="Reviews" link="./reviews" dropdown={false} />
