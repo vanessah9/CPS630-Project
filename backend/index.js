@@ -15,4 +15,6 @@ mongoose.connect(process.env.CONNECTION_STRING);
 
 require("./routes")(app);
 
+app.use("/admin/item", require("./routes/admin/item"));
+
 app.listen(PORT);
