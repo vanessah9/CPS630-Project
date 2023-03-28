@@ -4,44 +4,43 @@ const router = express.Router();
 const verifyJWT = require("../../middleware/verifyJWT");
 const verifyAdmin = require("../../middleware/verifyAdmin");
 
-const Item = require("../../models/item");
-const { getItemSchema, addItemSchema } = require("../../schemas/item");
+const Truck = require("../../models/truck");
 
-// get all items
+// get all trucks
 router.get("/all", [verifyJWT, verifyAdmin], async (req, res) => {
   try {
-    const items = await Item.find({});
-    return res.status(200).json({ data: items });
+    const trucks = await Truck.find({});
+    return res.status(200).json({ data: trucks });
   } catch (e) {
     return res.status(400).json({ error: e });
   }
 });
 
-// create a new item
+// create a new truck
 router.post("/", [verifyJWT, verifyAdmin], async (req, res) => {
   body = req.body;
 
   try {
-    const item = await Item.create(body);
+    const truck = await Truck.create(body);
 
-    if (item) {
-      return res.status(200).json({ data: "Added item successfully" });
+    if (truck) {
+      return res.status(200).json({ data: "Added truck successfully" });
     } else {
-      return res.status(400).json({ error: "Item could not be added" });
+      return res.status(400).json({ error: "Truck could not be added" });
     }
   } catch (e) {
     return res.status(400).json({ error: e });
   }
 });
 
-// delete an item by id
+// delete a truck by id
 router.delete("/:id", [verifyJWT, verifyAdmin], (req, res) => {
   const id = req.params.id;
-  Item.findByIdAndRemove(id)
+  Truck.findByIdAndRemove(id)
     .exec()
     .then((result) => {
       res.status(200).json({
-        message: "Item deleted",
+        message: "Truck deleted",
         result: result,
       });
     })
@@ -52,14 +51,14 @@ router.delete("/:id", [verifyJWT, verifyAdmin], (req, res) => {
     });
 });
 
-// update an item by id
+// update a truck by id
 router.put("/:id", [verifyJWT, verifyAdmin], (req, res) => {
   const id = req.params.id;
-  Item.findByIdAndUpdate(id, req.body, { new: true })
+  Truck.findByIdAndUpdate(id, req.body, { new: true })
     .exec()
     .then((result) => {
       res.status(200).json({
-        message: "Item updated",
+        message: "Truck updated",
         result: result,
       });
     })

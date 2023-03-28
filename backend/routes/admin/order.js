@@ -4,44 +4,43 @@ const router = express.Router();
 const verifyJWT = require("../../middleware/verifyJWT");
 const verifyAdmin = require("../../middleware/verifyAdmin");
 
-const Item = require("../../models/item");
-const { getItemSchema, addItemSchema } = require("../../schemas/item");
+const Order = require("../../models/order");
 
-// get all items
+// get all orders
 router.get("/all", [verifyJWT, verifyAdmin], async (req, res) => {
   try {
-    const items = await Item.find({});
-    return res.status(200).json({ data: items });
+    const orders = await Order.find({});
+    return res.status(200).json({ data: orders });
   } catch (e) {
     return res.status(400).json({ error: e });
   }
 });
 
-// create a new item
+// create a new order
 router.post("/", [verifyJWT, verifyAdmin], async (req, res) => {
   body = req.body;
 
   try {
-    const item = await Item.create(body);
+    const order = await Order.create(body);
 
-    if (item) {
-      return res.status(200).json({ data: "Added item successfully" });
+    if (order) {
+      return res.status(200).json({ data: "Added order successfully" });
     } else {
-      return res.status(400).json({ error: "Item could not be added" });
+      return res.status(400).json({ error: "Order could not be added" });
     }
   } catch (e) {
     return res.status(400).json({ error: e });
   }
 });
 
-// delete an item by id
+// delete an order by id
 router.delete("/:id", [verifyJWT, verifyAdmin], (req, res) => {
   const id = req.params.id;
-  Item.findByIdAndRemove(id)
+  Order.findByIdAndRemove(id)
     .exec()
     .then((result) => {
       res.status(200).json({
-        message: "Item deleted",
+        message: "Order deleted",
         result: result,
       });
     })
@@ -52,14 +51,14 @@ router.delete("/:id", [verifyJWT, verifyAdmin], (req, res) => {
     });
 });
 
-// update an item by id
+// update an order by id
 router.put("/:id", [verifyJWT, verifyAdmin], (req, res) => {
   const id = req.params.id;
-  Item.findByIdAndUpdate(id, req.body, { new: true })
+  Order.findByIdAndUpdate(id, req.body, { new: true })
     .exec()
     .then((result) => {
       res.status(200).json({
-        message: "Item updated",
+        message: "Order updated",
         result: result,
       });
     })

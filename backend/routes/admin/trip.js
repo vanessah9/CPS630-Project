@@ -4,44 +4,43 @@ const router = express.Router();
 const verifyJWT = require("../../middleware/verifyJWT");
 const verifyAdmin = require("../../middleware/verifyAdmin");
 
-const Item = require("../../models/item");
-const { getItemSchema, addItemSchema } = require("../../schemas/item");
+const Trip = require("../../models/trip");
 
-// get all items
+// get all trips
 router.get("/all", [verifyJWT, verifyAdmin], async (req, res) => {
   try {
-    const items = await Item.find({});
-    return res.status(200).json({ data: items });
+    const trips = await Trip.find({});
+    return res.status(200).json({ data: trips });
   } catch (e) {
     return res.status(400).json({ error: e });
   }
 });
 
-// create a new item
+// create a new trip
 router.post("/", [verifyJWT, verifyAdmin], async (req, res) => {
   body = req.body;
 
   try {
-    const item = await Item.create(body);
+    const trip = await Trip.create(body);
 
-    if (item) {
-      return res.status(200).json({ data: "Added item successfully" });
+    if (trip) {
+      return res.status(200).json({ data: "Added trip successfully" });
     } else {
-      return res.status(400).json({ error: "Item could not be added" });
+      return res.status(400).json({ error: "Trip could not be added" });
     }
   } catch (e) {
     return res.status(400).json({ error: e });
   }
 });
 
-// delete an item by id
+// delete a trip by id
 router.delete("/:id", [verifyJWT, verifyAdmin], (req, res) => {
   const id = req.params.id;
-  Item.findByIdAndRemove(id)
+  Trip.findByIdAndRemove(id)
     .exec()
     .then((result) => {
       res.status(200).json({
-        message: "Item deleted",
+        message: "Trip deleted",
         result: result,
       });
     })
@@ -52,14 +51,14 @@ router.delete("/:id", [verifyJWT, verifyAdmin], (req, res) => {
     });
 });
 
-// update an item by id
+// update a trip by id
 router.put("/:id", [verifyJWT, verifyAdmin], (req, res) => {
   const id = req.params.id;
-  Item.findByIdAndUpdate(id, req.body, { new: true })
+  Trip.findByIdAndUpdate(id, req.body, { new: true })
     .exec()
     .then((result) => {
       res.status(200).json({
-        message: "Item updated",
+        message: "Trip updated",
         result: result,
       });
     })

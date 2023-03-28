@@ -4,44 +4,43 @@ const router = express.Router();
 const verifyJWT = require("../../middleware/verifyJWT");
 const verifyAdmin = require("../../middleware/verifyAdmin");
 
-const Item = require("../../models/item");
-const { getItemSchema, addItemSchema } = require("../../schemas/item");
+const Shopping = require("../../models/shopping");
 
-// get all items
+// get all invoices
 router.get("/all", [verifyJWT, verifyAdmin], async (req, res) => {
   try {
-    const items = await Item.find({});
-    return res.status(200).json({ data: items });
+    const invoices = await Shopping.find({});
+    return res.status(200).json({ data: invoices });
   } catch (e) {
     return res.status(400).json({ error: e });
   }
 });
 
-// create a new item
+// create a new invoice
 router.post("/", [verifyJWT, verifyAdmin], async (req, res) => {
   body = req.body;
 
   try {
-    const item = await Item.create(body);
+    const invoice = await Shopping.create(body);
 
-    if (item) {
-      return res.status(200).json({ data: "Added item successfully" });
+    if (invoice) {
+      return res.status(200).json({ data: "Added invoice successfully" });
     } else {
-      return res.status(400).json({ error: "Item could not be added" });
+      return res.status(400).json({ error: "Invoice could not be added" });
     }
   } catch (e) {
     return res.status(400).json({ error: e });
   }
 });
 
-// delete an item by id
+// delete an invoice by id
 router.delete("/:id", [verifyJWT, verifyAdmin], (req, res) => {
   const id = req.params.id;
-  Item.findByIdAndRemove(id)
+  Shopping.findByIdAndRemove(id)
     .exec()
     .then((result) => {
       res.status(200).json({
-        message: "Item deleted",
+        message: "Invoice deleted",
         result: result,
       });
     })
@@ -52,14 +51,15 @@ router.delete("/:id", [verifyJWT, verifyAdmin], (req, res) => {
     });
 });
 
-// update an item by id
+// update an invoice by id
 router.put("/:id", [verifyJWT, verifyAdmin], (req, res) => {
   const id = req.params.id;
-  Item.findByIdAndUpdate(id, req.body, { new: true })
+
+  Shopping.findByIdAndUpdate(id, req.body, { new: true })
     .exec()
     .then((result) => {
       res.status(200).json({
-        message: "Item updated",
+        message: "Invoice updated",
         result: result,
       });
     })
