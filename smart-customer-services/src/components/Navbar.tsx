@@ -55,7 +55,11 @@ export default function Navbar() {
                   ["Past Orders", "/past-orders"],
                 ]}
               /> */}
-              <NavItem text="Shopping" link="/services-shopping" dropdown={false} />
+              <NavItem
+                text="Shopping"
+                link="/services-shopping"
+                dropdown={false}
+              />
               <NavItem text="Reviews" link="./reviews" dropdown={false} />
               <NavItem text="Contact" link="./contact" dropdown={false} />
             </ul>
@@ -64,17 +68,17 @@ export default function Navbar() {
               {loggedIn && (
                 <NavButton
                   icon={ShoppingCart}
-                  dropdown_items={[
-                    ["View Cart", "./cart"],
-                    ["Checkout", "./checkout"],
-                  ]}
+                  dropdown_items={[["View Cart", "./cart"]]}
                 />
               )}
               <NavButton
                 icon={User}
                 dropdown_items={
                   loggedIn
-                    ? [["View Profile", "./profile"]]
+                    ? [
+                        ["View Profile", "./profile"],
+                        ["Past Orders", "./past-orders"],
+                      ]
                     : [
                         ["Login", "./login"],
                         ["Sign Up", "./signup"],

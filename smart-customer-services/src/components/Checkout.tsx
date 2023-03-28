@@ -21,8 +21,6 @@ export default function Checkout() {
 
   const cartItems = location.state?.cartItems;
 
-  console.log(cartItems);
-
   useEffect(() => {
     checkLogin(navigate, location.pathname);
   }, [navigate, location.pathname]);
