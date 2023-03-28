@@ -30,19 +30,9 @@ module.exports = function (app) {
   });
 
   app.get("/review", verifyJWT, async (req, res) => {
-    const body = req.body;
-
-    const { error, value } = getReviewsPayload.validate(body);
-
-    if (error) {
-      return res.status(400).json({ error: error.message });
-    }
-
-    const { itemId } = value;
-
     try {
       const reviews = await Review.find(
-        { itemId: itemId },
+        { },
         { itemId: 0, _id: 0, __v: 0 }
       );
 
