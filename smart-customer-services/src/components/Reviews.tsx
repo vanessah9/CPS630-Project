@@ -32,26 +32,38 @@ export default function Reviews() {
     <div className="reviews">
       <h1 className="reviews-title">Reviews</h1>
       <button onClick={() => setShowModal(true)}>Add Review</button>
-      <ul>
-        {reviews.map((review, index) => (
-          <div key={index} className="reviews-item">
-            <h2 className="reviews-item__title">Review {index + 1}</h2>
-            <p className="reviews-item__text">Rating: {review.rating}</p>
-            <p className="reviews-item__text">Review: {review.reviewText}</p>
-          </div>
-        ))}
-      </ul>
+      {reviews.map((review, index) => (
+        <div key={index} className="reviews-item">
+          <h2 className="reviews-item__title">Review {index + 1}</h2>
+          <p className="reviews-item__text">Rating: {review.rating}</p>
+          <p className="reviews-item__text">Review: {review.reviewText}</p>
+        </div>
+      ))}
       {showModal && (
         <div className="modal">
           <div className="modal-content">
             <span className="close" onClick={() => setShowModal(false)}>
               &times;
             </span>
-            <ReviewForm reviews={reviews} setReviews={setReviews}/>
+            <ReviewForm reviews={reviews} setReviews={setReviews} />
             {/* <button onClick={handleSubmit}>Submit</button> */}
           </div>
         </div>
       )}
+      <div className="reviews-item">
+        <h2 className="reviews-item__title">Review 1</h2>
+        <p className="reviews-item__text">Rating: 5</p>
+        <p className="reviews-item__text">
+          Review: Quick and great service, affordable options.
+        </p>
+      </div>
+      <div className="reviews-item">
+        <h2 className="reviews-item__title">Review 2</h2>
+        <p className="reviews-item__text">Rating: 4</p>
+        <p className="reviews-item__text">
+          Review: Really good delivery service.
+        </p>
+      </div>
     </div>
   );
 }
