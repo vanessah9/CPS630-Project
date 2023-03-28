@@ -37,7 +37,8 @@ export default function Navbar() {
             <ul className="navbar-nav me-auto mb-2 mb-lg-0">
               <NavItem text="Home" link="/" dropdown={false} />
               <NavItem text="About" link="/" dropdown={false} />
-              <NavItem
+              <NavItem text="Services" link="/" dropdown={false} />
+              {/* <NavItem
                 text="Services"
                 dropdown={true}
                 dropdown_items={[
@@ -45,7 +46,8 @@ export default function Navbar() {
                   ["Delivery", "/services-delivery"],
                   ["Past Orders", "/past-orders"],
                 ]}
-              />
+              /> */}
+              <NavItem text="Shopping" link="/services-shopping" dropdown={false} />
               <NavItem text="Reviews" link="./reviews" dropdown={false} />
               <NavItem text="Contact" link="./contact" dropdown={false} />
             </ul>
