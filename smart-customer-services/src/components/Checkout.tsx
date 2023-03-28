@@ -108,7 +108,7 @@ export default function Checkout() {
       {/* <ItemsTable shippingCost={shippingCost} /> */}
       <h1 className="checkout-small-title">Delivery</h1>
       <p className="checkout-text">Delivery Address</p>
-      {userCoords ? (
+      {(userCoords && userCoords.lat !== 0 && userCoords.lng !== 0) ? (
         <p className="checkout-subtitle">
           <strong>Latitude: </strong>
           {userCoords?.lat}, <strong>Longitude: </strong>
