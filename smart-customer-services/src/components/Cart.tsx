@@ -21,7 +21,7 @@ export default function Cart() {
       navigate("/checkout", { state: { cartItems } });
     }
   };
-  
+
   useEffect(() => {
     fetchItems();
   }, []);
@@ -40,7 +40,6 @@ export default function Cart() {
     if (allItems.length > 0) {
       sessionItems.forEach(({ id, quantity }) => {
         const item = allItems.find((item: any) => item._id === id);
-        console.log(item);
         for (let i = 0; i < quantity; i++) {
           computedItems.push(item);
         }

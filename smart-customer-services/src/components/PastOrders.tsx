@@ -30,7 +30,6 @@ export default function PastOrders() {
           const dateObject = new Date(order.dateIssued);
           const humanDateFormat = dateObject.toLocaleString();
           const orderData = order.invoice?.items;
-          console.log(orderData);
           return (
             <>
               <details>
