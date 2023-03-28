@@ -4,10 +4,18 @@ import NavItem from "./NavItem";
 import NavButton from "./NavButton";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 export default function Navbar() {
   const navigate = useNavigate();
   const location = useLocation();
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    if (localStorage.getItem("token") !== null) {
+      setLoggedIn(true);
+    }
+  }, []);
 
   function signout() {
     localStorage.removeItem("token");
@@ -53,26 +61,29 @@ export default function Navbar() {
             </ul>
 
             <div className="navbar-nav dropdown-center navbar-btns">
-              <NavButton
-                icon={ShoppingCart}
-                dropdown_items={[
-                  ["View Cart", "./cart"],
-                  ["Checkout", "./checkout"],
-                ]}
-              />
+              {loggedIn && (
+                <NavButton
+                  icon={ShoppingCart}
+                  dropdown_items={[
+                    ["View Cart", "./cart"],
+                    ["Checkout", "./checkout"],
+                  ]}
+                />
+              )}
               <NavButton
                 icon={User}
-                dropdown_items={[
-                  ["Login", "./login"],
-                  ["Sign Up", "./signup"],
-                ]}
+                dropdown_items={
+                  loggedIn
+                    ? [["View Profile", "./profile"]]
+                    : [
+                        ["Login", "./login"],
+                        ["Sign Up", "./signup"],
+                      ]
+                }
               />
             </div>
             <div className="navbar-nav">
-              {location.pathname != "/login" &&
-                location.pathname != "/signup" && (
-                  <NavButton text="Sign Out" onClick={signout} />
-                )}
+              {loggedIn && <NavButton text="Sign Out" onClick={signout} />}
             </div>
           </div>
         </div>

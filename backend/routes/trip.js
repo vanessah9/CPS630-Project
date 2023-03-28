@@ -36,9 +36,17 @@ module.exports = {
       }
     });
 
-    app.get("/trip", verifyJWT, async (req, res) => {});
+    app.get("/trip/:tripId", verifyJWT, async (req, res) => {
+      const tripId = req.params.tripId;
 
-    app.get("/trip/:tripId", verifyJWT, async (req, res) => {});
+      try {
+        const trip = await Trip.findById(tripId);
+
+        return res.status(200).json({ data: trip });
+      } catch (e) {
+        return res.status(400).json({ error: "That tripId doesn't exist" });
+      }
+    });
   },
   createTrip,
 };

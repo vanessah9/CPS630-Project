@@ -4,6 +4,15 @@ const Item = require("../models/item");
 const { getItemSchema, addItemSchema } = require("../schemas/item");
 
 module.exports = function (app) {
+  app.get("/allitems", verifyJWT, async (req, res) => {
+    try {
+      const items = await Item.find({});
+      return res.status(200).json({ data: items });
+    } catch (e) {
+      return res.status(400).json({ error: e });
+    }
+  });
+
   app.get("/item", verifyJWT, async (req, res) => {
     body = req.body;
 

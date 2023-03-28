@@ -1,3 +1,5 @@
+import React from "react";
+
 interface InputProps {
   dropdown_items?: string[][];
   icon?: string;
@@ -10,7 +12,7 @@ export default function NavButton({ dropdown_items, icon, text, onClick }: Input
   if (dropdown_items) {
     itemList = dropdown_items.map((item, index) => {
       return (
-        <>
+        <React.Fragment key={index}>
           <li key={index}>
             <a className="dropdown-item" href={item[1]}>
               {item[0]}
@@ -21,7 +23,7 @@ export default function NavButton({ dropdown_items, icon, text, onClick }: Input
               <hr className="dropdown-divider" />
             </li>
           )}
-        </>
+        </React.Fragment>
       );
     });
   }
