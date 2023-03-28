@@ -28,6 +28,7 @@ export default function Profile() {
     const user = await getLoggedInUser();
     setUser(user);
   };
+
   useEffect(() => {
     let userAgent = navigator.userAgent;
     if (userAgent.includes("Chrome")) {
@@ -56,11 +57,6 @@ export default function Profile() {
         <div>Address: {user.address}</div>
         <div>City: {user.city}</div>
         <div>Powered by {browserName}</div>
-      </div>
-      <div>
-        <h2>Previous Orders</h2>
-        <div>Order #1</div>
-        <div>Insert Information Here</div>
       </div>
     </div>
   );

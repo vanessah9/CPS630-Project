@@ -1,42 +1,104 @@
 import isAdmin from "@/auth/isAdmin";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AdminTable from "./AdminTable";
 
 function AdminControllPanel() {
   const navigate = useNavigate();
-  const [items, setItems] = useState<Array<any>>([]);
-  // const [data, setData] = useState<any>({});
-
-  const data = {
-    name: "fries",
-    description: "McDonald's French fries the best in the game",
-    price: 2.02,
-    quantity: 1,
-    madeIn: "Canada",
-    deptCode: "1200",
-    category: "food",
-    image:
-      "https://thecozycook.com/wp-content/uploads/2020/02/Copycat-McDonalds-French-Fries-.jpg",
-    rating: 0,
-  };
+  const [column, setColumn] = useState<string[]>([]);
+  const [tableName, setTableName] = useState("");
 
   useEffect(() => {
     isAdmin(navigate);
   }, [navigate]);
 
+  const itemColumns = [
+    "name",
+    "description",
+    "price",
+    "quantity",
+    "madeIn",
+    "deptCode",
+    "category",
+    "image",
+  ];
+
+  const orderColumns = [
+    "userId",
+    "tripId",
+    "receiptId",
+    "paymentMethod",
+    "dateIssued",
+    "dateReceived",
+  ];
+
+  const tripColumns = ["sourceCode", "location", "destination"];
+
+  const userColumns = [
+    "firstName",
+    "lastName",
+    "email",
+    "phoneNo",
+    "password",
+    "address",
+    "city",
+    "province",
+    "postalCode",
+    "country",
+    "balance",
+    "isAdmin",
+  ];
+
+  const shoppingColumns = [
+    "userId",
+    "storeCode",
+    "date",
+    "time",
+    "paymentMethod",
+    "totalPrice",
+  ];
+
   return (
     <div>
-      <h1>Admin Controll Panel</h1>
-      
-      <ul>
-        {items.map((item: any, i) => (
-          <li key={i}>
-            <h2>{item.name}</h2>
-            <p>{item.description}</p>
-            <p>{item.price}</p>
-          </li>
-        ))}
-      </ul>
+      <h1>Admin Control Panel</h1>
+      <div>
+        <button
+          onClick={() => {
+            setColumn(itemColumns); setTableName("item");
+          }}
+        >
+          Items
+        </button>
+        <button
+          onClick={() => {
+            setColumn(orderColumns); setTableName("order");
+          }}
+        >
+          Orders
+        </button>
+        <button
+          onClick={() => {
+            setColumn(tripColumns); setTableName("trip");
+          }}
+        >
+          Trips
+        </button>
+        <button
+          onClick={() => {
+            setColumn(userColumns); setTableName("user");
+          }}
+        >
+          Users
+        </button>
+        <button
+          onClick={() => {
+            setColumn(shoppingColumns); setTableName("shopping");
+          }}
+        >
+          Shopping
+        </button>
+      </div>
+      {tableName && <AdminTable columns={column} tableName={tableName} />}
     </div>
   );
 }

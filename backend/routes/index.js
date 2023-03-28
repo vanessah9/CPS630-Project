@@ -5,4 +5,5 @@ module.exports = function (app) {
   require("./truck")(app);
   require("./trip").routes(app);
   require("./order")(app);
+  require("./review")(app);
 };

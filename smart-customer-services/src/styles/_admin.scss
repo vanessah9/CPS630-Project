@@ -1,0 +1,35 @@
+.admin {
+  border-collapse: collapse;
+  width: 100%;
+
+  &-head {
+    background-color: $primary;
+    color: white;
+    padding: 12px;
+    text-align: left;
+    width: 60px;
+  }
+  &-body {
+    padding: 8px;
+    word-wrap: break-word;
+  }
+  &-row {
+    background-color: white;
+    &:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+  }
+
+  &-btn {
+    background-color: $primary;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    border-radius: 10px;
+  }
+}
