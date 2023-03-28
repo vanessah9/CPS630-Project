@@ -15,11 +15,12 @@ module.exports = function (app) {
       return res.status(400).json({ error: error.message });
     }
 
-    const { itemId, review } = value;
+    const { itemId, ratingNumber, review } = value;
 
     try {
       const newReview = await Review.create({
         itemId: new mongoose.Types.ObjectId(itemId),
+        ratingNumber,
         review,
       });
 
@@ -29,10 +30,22 @@ module.exports = function (app) {
     }
   });
 
-  app.get("/review", verifyJWT, async (req, res) => {
+  app.get("/review", verifyJWT, async (_req, res) => {
+    try {
+      const reviews = await Review.find({}, { itemId: 0, _id: 0, __v: 0 });
+
+      return res.status(200).json({ data: reviews });
+    } catch (e) {
+      return res.status(400).json({ error: "No reviews" });
+    }
+  });
+
+  app.get("/review/:itemId", verifyJWT, async (req, res) => {
+    const itemId = req.params.itemId;
+
     try {
       const reviews = await Review.find(
-        { },
+        { itemId: itemId },
         { itemId: 0, _id: 0, __v: 0 }
       );
 
