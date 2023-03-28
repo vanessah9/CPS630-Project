@@ -28,6 +28,7 @@ export default function Profile() {
     const user = await getLoggedInUser();
     setUser(user);
   };
+  
   useEffect(() => {
     let userAgent = navigator.userAgent;
     if (userAgent.includes("Chrome")) {

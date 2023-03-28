@@ -74,7 +74,7 @@ export default function Navbar() {
                 icon={User}
                 dropdown_items={
                   loggedIn
-                    ? [["View Profile", "./profile"]]
+                    ? [["View Profile", "./profile"], ["Past Orders", "./past-orders"]]
                     : [
                         ["Login", "./login"],
                         ["Sign Up", "./signup"],
