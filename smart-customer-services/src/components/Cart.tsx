@@ -21,6 +21,7 @@ export default function Cart() {
       navigate("/checkout", { state: { cartItems } });
     }
   };
+  
   useEffect(() => {
     fetchItems();
   }, []);

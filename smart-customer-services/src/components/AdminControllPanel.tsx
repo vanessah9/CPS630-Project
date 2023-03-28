@@ -1,24 +1,24 @@
 import isAdmin from "@/auth/isAdmin";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 function AdminControllPanel() {
   const navigate = useNavigate();
   const [items, setItems] = useState<Array<any>>([]);
+  // const [data, setData] = useState<any>({});
 
-  function getData() {
-    axios
-      .get("http://localhost:3000/allitems", {
-        headers: { "x-access-token": localStorage.getItem("token") || "" },
-      })
-      .then((res) => {
-        setItems(res.data.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }
+  const data = {
+    name: "fries",
+    description: "McDonald's French fries the best in the game",
+    price: 2.02,
+    quantity: 1,
+    madeIn: "Canada",
+    deptCode: "1200",
+    category: "food",
+    image:
+      "https://thecozycook.com/wp-content/uploads/2020/02/Copycat-McDonalds-French-Fries-.jpg",
+    rating: 0,
+  };
 
   useEffect(() => {
     isAdmin(navigate);
@@ -27,7 +27,7 @@ function AdminControllPanel() {
   return (
     <div>
       <h1>Admin Controll Panel</h1>
-      <button onClick={getData}>data</button>
+      
       <ul>
         {items.map((item: any, i) => (
           <li key={i}>
