@@ -3,14 +3,21 @@ import ShoppingItem from "./ShoppingItem";
 import ShoppingCart from "@/assets/icons/shopping-cart.svg";
 import { getItems } from "@/api/itemsApi";
 import { SessionItem } from "@/models/Shopping";
+import checkLogin from "@/auth/checkLogin";
+import { useNavigate } from "react-router-dom";
 
 export default function Shopping() {
+  const navigate = useNavigate();
   let sessionArray = JSON.parse(sessionStorage.getItem("items") || "[]");
 
   const [dragging, setDragging] = useState(false);  
   const [cartCount, setCartCount] = useState<number>(sessionArray.length);
   const [items, setItems] = useState<any>([]);
   const [error, setError] = useState("");
+
+  useEffect(() => {
+    checkLogin(navigate, location.pathname);
+  }, [navigate, location.pathname]);
 
   useEffect(() => {
     fetchItems();

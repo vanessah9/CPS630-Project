@@ -3,18 +3,9 @@ import DeliveryPerson from "@/assets/images/delivery_person.svg";
 import ShoppingBag from "@/assets/icons/shopping-bag.svg";
 import Truck from "@/assets/icons/truck.svg";
 import Package from "@/assets/icons/package.svg";
-import checkLogin from "@/auth/checkLogin";
-import { useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 export default function Home() {
-  const navigate = useNavigate();
-  const location = useLocation();
-
-  useEffect(() => {
-    checkLogin(navigate, location.pathname);
-  }, [navigate, location.pathname]);
-
   return (
     <div className="home">
       <Navbar />
