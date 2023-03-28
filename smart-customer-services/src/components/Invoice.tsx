@@ -14,7 +14,6 @@ export default function Invoice() {
   const [cardNumber, setCardNumber] = useState("");
 
   const handleCardNumberChange = (e: ChangeEvent<HTMLInputElement>) => {
-    // todo: add payment validation here
     setCardNumber(e.target.value);
   };
 
@@ -23,6 +22,7 @@ export default function Invoice() {
     if (form) {
       setFormValid(form.checkValidity());
     }
+    handleCardNumberChange(e);
   };
 
   useEffect(() => {
@@ -58,28 +58,34 @@ export default function Invoice() {
         branch={branchCoords.branchCoords}
         address={userCoords.userCoords}
       />
-      <form className="was-validated invoice-checkbox">
-        <div>
-          <label htmlFor="ccn">Credit Card Number:</label>
+
+      <h3>Payment</h3>
+      <form className="was-validated invoice-form">
+        <div className="col-md-6 invoice-form-elem">
+          <label htmlFor="cc-number" className="form-label">
+            Credit card number
+          </label>
           <input
+            type="text"
+            className="form-control"
             id="ccn"
-            type="tel"
-            value={cardNumber}
-            onChange={handleCardNumberChange}
+            onChange={handleInputChange}
             pattern="[0-9\s]{13,19}"
             maxLength={19}
             placeholder="xxxx xxxx xxxx xxxx"
+            required
           />
+          <div className="invalid-feedback">Credit card number is required</div>
         </div>
-        <div className="form-check mb-3">
+        <div className="form-check col-md-6 invoice-form-elem">
           <input
             type="checkbox"
             className="form-check-input"
-            id="validationFormCheck1"
+            id="invoiceCheckbox"
             onChange={handleInputChange}
             required
           />
-          <label className="form-check-label" htmlFor="validationFormCheck1">
+          <label className="form-check-label" htmlFor="invoiceCheckbox">
             I accept.
           </label>
           <div className="invalid-feedback">
