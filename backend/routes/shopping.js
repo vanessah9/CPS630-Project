@@ -58,7 +58,30 @@ module.exports = {
       }
     });
 
-    app.get("/invoice/:invoiceId", verifyJWT, async (req, res) => {});
+    app.get("/invoice/:invoiceId", verifyJWT, async (req, res) => {
+      const user = req.user;
+      const invoiceId = req.params.invoiceId;
+
+      try {
+        const invoice = await Shopping.findOne({
+          _id: invoiceId,
+          userId: user.id,
+        });
+
+        let itemsInfo = [];
+        for (const item of invoice.items) {
+          const info = await Items.findOne({ _id: item.id }, { _id: 0 });
+
+          itemsInfo.push({ ...item._doc, item: info });
+        }
+
+        return res.status(200).json({ data: { ...invoice._doc, items: itemsInfo } });
+      } catch (e) {
+        return res
+          .status(400)
+          .json({ error: "No invoices in our records with that invoice ID" });
+      }
+    });
   },
   createInvoice,
 };
