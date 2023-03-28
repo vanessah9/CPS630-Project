@@ -2,9 +2,6 @@ const mongoose = require("mongoose");
 
 const verifyJWT = require("../middleware/verifyJWT");
 
-const { createTrip } = require("./trip");
-const { createInvoice } = require("./shopping");
-
 const Order = require("../models/order");
 
 const { orderPayload } = require("../schemas/order");

@@ -1,5 +1,5 @@
 import checkLogin from "@/auth/checkLogin";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 export default function Reviews() {
@@ -9,9 +9,48 @@ export default function Reviews() {
   useEffect(() => {
     checkLogin(navigate, location.pathname);
   }, [navigate, location.pathname]);
+
+  const [showModal, setShowModal] = useState(false);
+  const [review, setReview] = useState("");
+  const [RN, setRN] = useState("");
+
+  const handleSubmit = () => {
+    // add post request here
+    setRN("");
+    setReview("");
+  };
+
   return (
     <div className="reviews">
       <h1 className="reviews-title">Reviews</h1>
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={() => setShowModal(false)}>
+              &times;
+            </span>
+            <p>
+              <h3>Rating (1-5)</h3>
+              <input
+                type="number"
+                min="1"
+                max="5"
+                value={RN}
+                onChange={(e) => setRN(e.target.value)}
+              />
+
+              <h3>Review</h3>
+              <textarea
+                value={review}
+                onChange={(e) => setReview(e.target.value)}
+              />
+            </p>
+            <button onClick={handleSubmit}>Submit</button>
+          </div>
+        </div>
+      )}
+
+      <button onClick={() => setShowModal(true)}>Add Review</button>
       <div className="reviews-item">
         <h2 className="reviews-item__title">Review 1</h2>
         <p className="reviews-item__text">
