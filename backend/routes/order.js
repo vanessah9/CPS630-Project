@@ -46,7 +46,6 @@ module.exports = function (app) {
 
       for (const order of orders) {
         const tripInfo = await getTripInfo(order.tripId);
-        console.log(tripInfo)
         const invoiceInfo = await getInvoiceInfo(userId, order.receiptId);
 
         orderInfo.push({ ...order._doc, trip: tripInfo, invoice: invoiceInfo });
