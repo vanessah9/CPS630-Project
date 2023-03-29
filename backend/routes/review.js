@@ -24,7 +24,7 @@ module.exports = function (app) {
         review,
       });
 
-      return res.status(200).json({ data: newReview._id });
+      return res.status(200).json({ message: "Success", data: newReview });
     } catch (e) {
       return res.status(400).json({ error: "Was unable to create the review" });
     }
