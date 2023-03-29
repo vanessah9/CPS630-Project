@@ -2,10 +2,12 @@ import checkLogin from "@/auth/checkLogin";
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ReviewForm from "./ReviewForm";
+import { getReviews } from "@/api/reviewApi";
 
 interface Review {
-  rating: number;
-  reviewText: string;
+  ratingNumber: number;
+  review: string;
+  services?: string[];
 }
 
 export default function Reviews() {
@@ -19,26 +21,49 @@ export default function Reviews() {
   const [reviews, setReviews] = useState<Review[]>([]);
   const [showModal, setShowModal] = useState(false);
 
-  // const [review, setReview] = useState("");
-  // const [RN, setRN] = useState(0);
-
-  // const handleSubmit = () => {
-  //   // add post request here
-  //   setRN(0);
-  //   setReview("");
-  // };
+  useEffect(() => {
+    const fetchReviews = async () => {
+      const result = await getReviews();
+      setReviews(result.data);
+    };
+    fetchReviews();
+  }, []);
 
   return (
     <div className="reviews">
       <h1 className="reviews-title">Reviews</h1>
-      <button onClick={() => setShowModal(true)}>Add Review</button>
-      {reviews.map((review, index) => (
-        <div key={index} className="reviews-item">
-          <h2 className="reviews-item__title">Review {index + 1}</h2>
-          <p className="reviews-item__text">Rating: {review.rating}</p>
-          <p className="reviews-item__text">Review: {review.reviewText}</p>
-        </div>
-      ))}
+      <div className="d-grid col-6 mx-auto">
+        <button
+          className="btn btn-primary reviews-btn"
+          type="button"
+          onClick={() => setShowModal(true)}
+        >
+          Add Review
+        </button>
+      </div>
+      <div className="row row-cols-1 row-cols-md-2 g-4 reviews-item">
+        {reviews.map((review, index) => (
+          <div key={index} className="col">
+            <div className="card">
+              <div className="card-body">
+                <h5 className="card-title mb-3">{review.ratingNumber}/5</h5>
+                <blockquote className="blockquote mb-3">
+                  <p>"{review.review}"</p>
+                  
+                </blockquote>
+                {review.services && (
+                  <h6 className="card-subtitle mb-0">
+                    Services Used: {review.services.join(", ")}
+                  </h6>
+                )}
+              </div>
+              <div className="card-footer">
+                <small className="text-body-secondary">By: Name</small>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
       {showModal && (
         <div className="modal">
           <div className="modal-content">
@@ -46,24 +71,9 @@ export default function Reviews() {
               &times;
             </span>
             <ReviewForm reviews={reviews} setReviews={setReviews} />
-            {/* <button onClick={handleSubmit}>Submit</button> */}
           </div>
         </div>
       )}
-      <div className="reviews-item">
-        <h2 className="reviews-item__title">Review 1</h2>
-        <p className="reviews-item__text">Rating: 5</p>
-        <p className="reviews-item__text">
-          Review: Quick and great service, affordable options.
-        </p>
-      </div>
-      <div className="reviews-item">
-        <h2 className="reviews-item__title">Review 2</h2>
-        <p className="reviews-item__text">Rating: 4</p>
-        <p className="reviews-item__text">
-          Review: Really good delivery service.
-        </p>
-      </div>
     </div>
   );
 }
