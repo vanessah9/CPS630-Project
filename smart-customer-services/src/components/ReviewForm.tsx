@@ -1,10 +1,5 @@
+import Review from "@/models/Review";
 import { useState } from "react";
-
-interface Review {
-  ratingNumber: number;
-  review: string;
-  services?: string[];
-}
 
 interface ReviewFormProps {
   reviews: Review[];

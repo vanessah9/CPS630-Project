@@ -3,12 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ReviewForm from "./ReviewForm";
 import { getReviews } from "@/api/reviewApi";
-
-interface Review {
-  ratingNumber: number;
-  review: string;
-  services?: string[];
-}
+import Review from "@/models/Review";
 
 export default function Reviews() {
   const navigate = useNavigate();
@@ -49,7 +44,6 @@ export default function Reviews() {
                 <h5 className="card-title mb-3">{review.ratingNumber}/5</h5>
                 <blockquote className="blockquote mb-3">
                   <p>"{review.review}"</p>
-                  
                 </blockquote>
                 {review.services && (
                   <h6 className="card-subtitle mb-0">
