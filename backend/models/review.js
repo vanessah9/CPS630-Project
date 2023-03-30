@@ -1,11 +1,6 @@
 const mongoose = require("mongoose");
 
 const reviewSchema = new mongoose.Schema({
-  itemId: {
-    type: mongoose.SchemaTypes.ObjectId,
-    required: true,
-    ref: "item",
-  },
   ratingNumber: {
     type: Number,
     required: true,
@@ -14,6 +9,19 @@ const reviewSchema = new mongoose.Schema({
   },
   review: {
     type: String,
+    required: true,
+  },
+  name: {
+    type: String,
+    required: true,
+  },
+  userId: {
+    type: mongoose.SchemaTypes.ObjectId,
+    required: true,
+    ref: "user",
+  },
+  services: {
+    type: Array,
     required: true,
   },
 });
