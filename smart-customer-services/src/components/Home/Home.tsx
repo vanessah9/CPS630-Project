@@ -1,4 +1,4 @@
-import Navbar from "./Navbar";
+import Navbar from "../Navbar/Navbar";
 import DeliveryPerson from "@/assets/images/delivery_person.svg";
 import ShoppingBag from "@/assets/icons/shopping-bag.svg";
 import Truck from "@/assets/icons/truck.svg";

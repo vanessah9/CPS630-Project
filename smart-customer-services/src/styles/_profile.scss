@@ -1,0 +1,18 @@
+.profile {
+  &-title {
+    text-align: center;
+    color: $primary;
+    font-size: $title;
+  }
+
+  &-content {
+    &__header {
+      font-size: 24px;
+      font-weight: 600;
+    }
+    &__item {
+      font-size: 16px;
+      font-weight: 400;
+    }
+  }
+}

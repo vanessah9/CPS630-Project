@@ -46,17 +46,17 @@ export default function Profile() {
 
   useEffect(() => {}, [browserName]);
   return (
-    <div>
-      <h1>
+    <div className="profile">
+      <h1 className="profile-title">
         Welcome Back, {user.firstName} {user.lastName}
       </h1>
-      <div>
-        <h2>Account Information</h2>
-        <div>Email: {user.email}</div>
-        <div>Phone Number: {user.phoneNo}</div>
-        <div>Address: {user.address}</div>
-        <div>City: {user.city}</div>
-        <div>Powered by {browserName}</div>
+      <div className="profile-content">
+        <h2 className="profile-content__header">Account Information</h2>
+        <div className="profile-content__item">Email: {user.email}</div>
+        <div className="profile-content__item">Phone Number: {user.phoneNo}</div>
+        <div className="profile-content__item">Address: {user.address}</div>
+        <div className="profile-content__item">City: {user.city}</div>
+        <div className="profile-content__item">Powered by {browserName}</div>
       </div>
     </div>
   );

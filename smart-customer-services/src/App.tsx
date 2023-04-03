@@ -1,19 +1,19 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./components/Home";
-import Contact from "./components/Contact";
-import Reviews from "./components/Reviews";
-import Signup from "./components/Signup";
-import Login from "./components/Login";
-import Cart from "./components/Cart";
-import Checkout from "./components/Checkout";
-import Invoice from "./components/Invoice";
-import OrderConfirmation from "./components/OrderConfirmation";
-import Shopping from "./components/Shopping";
-import Profile from "./components/Profile";
-import AdminControllPanel from "./components/AdminControllPanel";
-import PastOrders from './components/PastOrders';
+import Navbar from "./components/Navbar/Navbar";
+import Home from "./components/Home/Home";
+import Contact from "./components/Contact/Contact";
+import Reviews from "./components/Reviews/Reviews";
+import Signup from "./components/Auth/Signup";
+import Login from "./components/Auth/Login";
+import Cart from "./components/Orders/Cart";
+import Checkout from "./components/Orders/Checkout";
+import Invoice from "./components/Orders/Invoice";
+import OrderConfirmation from "./components/Orders/OrderConfirmation";
+import Shopping from "./components/Shopping/Shopping";
+import Profile from "./components/Profile/Profile";
+import AdminControllPanel from "./components/Admin/AdminControllPanel";
+import PastOrders from './components/Orders/PastOrders';
 
 function App() {
   return (
