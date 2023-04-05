@@ -9,6 +9,9 @@ const Trip = require("../models/trip");
 
 const { orderPayload } = require("../schemas/order");
 
+const { createInvoice } = require("./shopping");
+const { createTrip } = require("./trip");
+
 module.exports = function (app) {
   app.post("/order", verifyJWT, async (req, res) => {
     const user = req.user;
@@ -19,13 +22,29 @@ module.exports = function (app) {
       return res.status(400).json({ error: error.message });
     }
 
-    const { invoiceId, tripId, paymentMethod } = value;
+    const {
+      storeCode,
+      items,
+      sourceCode,
+      location,
+      destination,
+      paymentMethod,
+    } = value;
 
     try {
+      const invoice = await createInvoice(
+        user,
+        items,
+        paymentMethod,
+        storeCode
+      );
+
+      const trip = await createTrip(user, sourceCode, location, destination);
+
       const order = await Order.create({
         userId: new mongoose.Types.ObjectId(user.id),
-        tripId: new mongoose.Types.ObjectId(tripId),
-        receiptId: new mongoose.Types.ObjectId(invoiceId),
+        tripId: new mongoose.Types.ObjectId(trip.tripId),
+        receiptId: new mongoose.Types.ObjectId(invoice.invoiceId),
         paymentMethod,
       });
 
