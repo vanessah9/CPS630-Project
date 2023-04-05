@@ -3,10 +3,11 @@
 
   .nav-link {
     color: #02785d;
-    font-weight: bold;
+    font-weight: 500;
+    margin-right: 10px;
 
-    &:focus {
-      color: #02785d;
+    &:hover {
+      color: #274838;
     }
   }
 }

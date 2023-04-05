@@ -45,14 +45,23 @@
     text-align: center;
 
     &__title {
-      font-size: $item-title;
-      font-weight: bold;
+      padding-top: 12px;
+      margin-bottom: 0px;
+
+      color: $primary;
+      font-size: 20px;
+      font-weight: 500;
+    }
+
+    &__price{
+      font-size: 16px;
     }
 
     &__image {
       user-select: none;
       -webkit-user-drag: none;
       max-width: 200px;
+      height: 200px;
     }
   }
 }
