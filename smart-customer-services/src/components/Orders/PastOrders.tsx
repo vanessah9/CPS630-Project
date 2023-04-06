@@ -40,7 +40,7 @@ export default function PastOrders() {
                       <div>
                         <div>Name: {item.item?.name}</div>
                         <div>Price: ${item.item?.price}</div>
-                        <div>Quantity: {item.item?.quantity}</div>
+                        <div>Quantity: {item.quantity}</div>
                         <br />
                       </div>
                     );

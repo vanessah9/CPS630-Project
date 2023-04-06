@@ -22,8 +22,6 @@ const APIKEY = import.meta.env.VITE_GOOGLE_KEY;
 Geocode.setApiKey(APIKEY!);
 
 function DeliveryMap({ branch, address }: InputProps) {
-  console.log("address", address.lat, address.lng);
-  console.log("branch", branch.lat, branch.lng);
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: APIKEY!,

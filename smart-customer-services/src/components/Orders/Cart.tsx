@@ -2,7 +2,6 @@ import checkLogin from "@/auth/checkLogin";
 import { useState, useEffect, useRef } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ItemsTable from "./ItemsTable";
-import { Link } from "react-router-dom";
 import { getItems } from "@/api/itemsApi";
 import { SessionItem } from "@/models/Shopping";
 

@@ -18,6 +18,7 @@ export default function Checkout() {
   const [userCoords, setUserCoords] = useState<LatLng>({ lat: 0, lng: 0 });
   const [estimateDelivery, setEstimateDelivery] = useState<Date | null>(null);
   const [formValid, setFormValid] = useState(false);
+  const [active, setActive] = useState(false);
 
   const cartItems = location.state?.cartItems;
 
@@ -43,6 +44,7 @@ export default function Checkout() {
       const lat = position.coords.latitude;
       const lng = position.coords.longitude;
       setUserCoords({ lat: lat, lng: lng });
+      setActive(true);
     };
     const errorCallback: PositionErrorCallback = (
       error: GeolocationPositionError
@@ -158,7 +160,7 @@ export default function Checkout() {
         type="button"
         className="checkout-btn btn btn-outline-primary btn-lg"
         onClick={invoicePage}
-        disabled={!formValid && !userCoords}
+        disabled={!formValid && !userCoords && active}
       >
         Next
       </button>

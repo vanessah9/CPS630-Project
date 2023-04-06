@@ -3,11 +3,15 @@ import { ChangeEvent, useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import ItemsTable from "./ItemsTable";
 import DeliveryMap from "./DeliveryMap";
-import { getInvoiceItems } from "@/api/invoiceApi";
+import { postOrder, Order } from "@/api/orderApi";
+import { SessionItem } from "@/models/Shopping";
 
 export default function Invoice() {
   const navigate = useNavigate();
   const location = useLocation();
+  let sessionItems: SessionItem[] = JSON.parse(
+    sessionStorage.getItem("items") || "[]"
+  );
 
   const [formValid, setFormValid] = useState(false);
 
@@ -33,14 +37,28 @@ export default function Invoice() {
     navigate("/checkout");
   };
 
-  const OrderConfirmPage = () => {
-    navigate("/orderConfirmation");
-  };
-
   const shippingCost = location.state?.shippingCost;
   const branchCoords = location.state?.branchCoords;
   const userCoords = location.state?.userCoords;
   const invoiceItems = location.state?.cartItems;
+
+  const OrderConfirmPage = async () => {
+
+    const order: Order = {
+      storeCode: "1232",
+      sourceCode: "8423",
+      destination: userCoords.userCoords,
+      location: branchCoords.branchCoords,
+      paymentMethod: "Visa",
+      cardNumber: cardNumber,
+      items: sessionItems,
+    };
+
+    await postOrder(order);
+
+    sessionStorage.clear();
+    navigate("/orderConfirmation");
+  };
 
   return (
     <div className="invoice">

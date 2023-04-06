@@ -43,8 +43,7 @@ export default function Profile() {
       setBrowserName("Unknown");
     }
   }, [browserName]);
-
-  useEffect(() => {}, [browserName]);
+  
   return (
     <div className="profile">
       <h1 className="profile-title">
