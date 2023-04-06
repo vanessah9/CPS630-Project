@@ -19,6 +19,10 @@ const orderSchema = new mongoose.Schema({
     type: String,
     default: "",
   },
+  cardNumber: {
+    type: String,
+    required: true,
+  },
   dateIssued: {
     type: Date,
     default: Date.now,

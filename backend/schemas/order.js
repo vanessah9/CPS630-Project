@@ -17,6 +17,7 @@ const orderPayload = Joi.object({
   location: coordinatePayload,
   destination: coordinatePayload,
   paymentMethod: Joi.string().required(),
+  cardNumber: Joi.string().required(),
 });
 
 exports.orderPayload = orderPayload;

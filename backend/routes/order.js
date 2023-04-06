@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const bcrypt = require("bcryptjs");
 
 const verifyJWT = require("../middleware/verifyJWT");
 
@@ -29,6 +30,7 @@ module.exports = function (app) {
       location,
       destination,
       paymentMethod,
+      cardNumber,
     } = value;
 
     try {
@@ -39,13 +41,23 @@ module.exports = function (app) {
         storeCode
       );
 
+      if (invoice.error) {
+        throw invoice.error;
+      }
+
       const trip = await createTrip(user, sourceCode, location, destination);
+
+      if (trip.error) {
+        throw trip.error;
+      }
+      const encCardNumber = await bcrypt.hash(cardNumber, 13);
 
       const order = await Order.create({
         userId: new mongoose.Types.ObjectId(user.id),
         tripId: new mongoose.Types.ObjectId(trip.tripId),
         receiptId: new mongoose.Types.ObjectId(invoice.invoiceId),
         paymentMethod,
+        cardNumber: encCardNumber,
       });
 
       return res.status(200).json({ data: { id: order._id } });
@@ -59,7 +71,7 @@ module.exports = function (app) {
     const user = req.user;
 
     try {
-      const orders = await Order.find({ userId: user.id });
+      const orders = await Order.find({ userId: user.id }, { cardNumber: 0 });
 
       const orderInfo = [];
 
