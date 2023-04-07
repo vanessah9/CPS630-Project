@@ -76,11 +76,10 @@ export default function Contact() {
           />
           <h2 className="contact-item__title">Ethan Hou</h2>
           <p className="contact-item__text">
-            Hey, I'm Ethan! I'm a marketing professional with a passion for
-            strategy and data-driven insights. I love developing innovative
-            marketing campaigns that drive results and help businesses grow. In
-            my free time, I enjoy playing basketball, watching documentaries,
-            and exploring new cities around the world.
+            Hey, I'm Ethan! I'm a sports and gym enthusiast, gamer, and a software developer who wants to make a change in the world.
+            I love being around the world of technology, and I'm always looking for new ways to improve my skills.
+            During my free time, I enjoy playing basketball and volleyball mainly, lifting, and playing video games.
+            I would love to travel the world and experience different cultures in the near future!
           </p>
         </div>
       </div>
