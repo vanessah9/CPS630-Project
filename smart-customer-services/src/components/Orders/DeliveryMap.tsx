@@ -43,30 +43,9 @@ function DeliveryMap({ branch, address }: InputProps) {
   };
 
   useEffect(() => {
-    // Geocode.fromAddress(branch).then(
-    //   (response) => {
-    //     const { lat, lng } = response.results[0].geometry.location;
-    //     setSource({ lat, lng });
-    //   },
-    //   (error) => {
-    //     console.error(error);
-    //   }
-    // );
     setSource({lat: branch.lat, lng: branch.lng})
     setDestination({ lat: address.lat, lng: address.lng });
   }, [branch, address]);
-
-  // useEffect(() => {
-  //   Geocode.fromAddress(address).then(
-  //     (response) => {
-  //       const { lat, lng } = response.results[0].geometry.location;
-  //       setDestination({ lat, lng });
-  //     },
-  //     (error) => {
-  //       console.error(error);
-  //     }
-  //   );
-  // }, [address]);
 
   useEffect(() => {
     if (source && destination) {
