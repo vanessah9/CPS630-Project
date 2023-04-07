@@ -4,6 +4,7 @@ const orderSchema = new mongoose.Schema({
   userId: {
     type: mongoose.SchemaTypes.ObjectId,
     required: true,
+    ref: "user",
   },
   tripId: {
     type: mongoose.SchemaTypes.ObjectId,
