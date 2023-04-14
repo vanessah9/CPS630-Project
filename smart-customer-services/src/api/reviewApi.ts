@@ -9,14 +9,13 @@ export const getReviews = async () => {
 };
 
 export const postReview = async (review: Review) => {
-    try {
-      const response = await axiosClient.post("/review", review, {
-        headers: { "x-access-token": localStorage.getItem("token") },
-      });
-      console.log("data", response.data);
-      return response.data;
-    } catch (error) {
-      console.error(error);
-    }
-  };
-  
+  try {
+    const response = await axiosClient.post("/review", review, {
+      headers: { "x-access-token": localStorage.getItem("token") },
+    });
+    console.log("data", response.data);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};

@@ -1,5 +1,6 @@
 import Review from "@/models/Review";
 import { useState } from "react";
+import { postReview } from "@/api/reviewApi";
 
 interface ReviewFormProps {
   reviews: Review[];
@@ -19,6 +20,7 @@ const ReviewForm = ({ reviews, setReviews }: ReviewFormProps) => {
       services: services,
     };
 
+    postReview(newReview);
     setReviews([...reviews, newReview]);
 
     setRating(0);

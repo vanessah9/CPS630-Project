@@ -32,7 +32,14 @@ function AdminControllPanel() {
     "dateReceived",
   ];
 
-  const tripColumns = ["sourceCode", "location", "destination"];
+  const tripColumns = [
+    "destinationCode",
+    "distance",
+    "price",
+    "sourceCode",
+    "status",
+    "truckId",
+  ];
 
   const userColumns = [
     "firstName",
@@ -60,45 +67,61 @@ function AdminControllPanel() {
 
   return (
     <div>
-      <h1>Admin Control Panel</h1>
-      <div>
+      <h1 className="admin-title">Admin Control Panel</h1>
+      <div className="admin-nav">
         <button
+          className={tableName === "item" ? "admin-btn active" : "admin-btn"}
           onClick={() => {
-            setColumn(itemColumns); setTableName("item");
+            setColumn(itemColumns);
+            setTableName("item");
           }}
         >
           Items
         </button>
         <button
+          className={tableName === "order" ? "admin-btn active" : "admin-btn"}
           onClick={() => {
-            setColumn(orderColumns); setTableName("order");
+            setColumn(orderColumns);
+            setTableName("order");
           }}
         >
           Orders
         </button>
         <button
+          className={tableName === "trip" ? "admin-btn active" : "admin-btn"}
           onClick={() => {
-            setColumn(tripColumns); setTableName("trip");
+            setColumn(tripColumns);
+            setTableName("trip");
           }}
         >
           Trips
         </button>
         <button
+          className={tableName === "user" ? "admin-btn active" : "admin-btn"}
           onClick={() => {
-            setColumn(userColumns); setTableName("user");
+            setColumn(userColumns);
+            setTableName("user");
           }}
         >
           Users
         </button>
         <button
+          className={
+            tableName === "shopping" ? "admin-btn active" : "admin-btn"
+          }
           onClick={() => {
-            setColumn(shoppingColumns); setTableName("shopping");
+            setColumn(shoppingColumns);
+            setTableName("shopping");
           }}
         >
           Shopping
         </button>
       </div>
-      {tableName && <AdminTable columns={column} tableName={tableName} />}
+      {tableName ? (
+        <AdminTable columns={column} tableName={tableName} />
+      ) : (
+        <p>Please select a table</p>
+      )}
     </div>
   );
 }

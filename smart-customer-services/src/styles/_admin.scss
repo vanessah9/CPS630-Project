@@ -1,4 +1,12 @@
 .admin {
+  &-title {
+    color: $primary;
+    text-align: center;
+    font-size: $title;
+  }
+  &-nav {
+    margin-bottom: 20px;
+  }
   border-collapse: collapse;
   width: 100%;
 
@@ -29,7 +37,39 @@
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 4px 2px;
+    margin-right: 15px;
     border-radius: 10px;
+  }
+
+  &-img {
+    max-height: 30px;
+  }
+
+  &-input {
+    margin-bottom: 20px;
+  }
+}
+
+.active {
+  background-color: $primary-dark;
+  color: white;
+}
+
+.form-flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-floating {
+  flex-basis: 50%;
+  box-sizing: border-box;
+}
+
+.add {
+  display: flex;
+  justify-content: flex-end;
+  &-btn {
+    align-items: flex-end;
+    margin-top: 12px;
   }
 }

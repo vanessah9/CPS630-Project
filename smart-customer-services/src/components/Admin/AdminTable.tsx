@@ -9,7 +9,8 @@ interface AdminTableProps {
 export default function AdminTable<T>(props: AdminTableProps) {
   const [data, setData] = useState<any>([]);
   const [formData, setFormData] = useState<any>({});
-
+  const [showModal, setShowModal] = useState(false);
+  const [currId, setCurrId] = useState("");
   useEffect(() => {
     getItems(props.tableName);
   }, [props.tableName]);
@@ -20,6 +21,7 @@ export default function AdminTable<T>(props: AdminTableProps) {
         headers: { "x-access-token": localStorage.getItem("token") || "" },
       })
       .then((res) => {
+        console.log(res);
         setData(res.data.data);
       })
       .catch((err) => {
@@ -78,35 +80,53 @@ export default function AdminTable<T>(props: AdminTableProps) {
     deleteItem(props.tableName, id);
   };
 
-  
-  const logFormData = () => {
-    console.log(formData);
-  }
   const renderAdminForm = ({ labels }: any) => {
     return (
       <form>
-        <h3>Form to Add/Update Record</h3>
-        {labels.map((label: any) => (
-          <div key={label}>
-            <label>{label}: </label>
-            <input
-              type="text"
-              value={formData[label] || ""}
-              onChange={(e) =>
-                setFormData({ ...formData, [label]: e.target.value })
-              }
-              required
-            />
-          </div>
-        ))}
+        <h3>Modify Data</h3>
+        <div className="form-flex-container">
+          {labels.map((label: any) => (
+            <div className="form-floating" key={label}>
+              <input
+                className="form-control admin-input"
+                type="text"
+                value={formData[label] || ""}
+                onChange={(e) =>
+                  setFormData({ ...formData, [label]: e.target.value })
+                }
+                required
+              />
+              <label htmlFor={label}>{label}</label>
+            </div>
+          ))}
+        </div>
+        <button
+          type="submit"
+          className="admin-btn"
+          onClick={() => {
+            currId ? handleUpdate(currId) : handleAdd();
+          }}
+        >
+          {currId ? "Update Record" : "Add Record"}
+        </button>
       </form>
     );
   };
 
+  console.log(props.columns);
   return (
     <div>
-      {renderAdminForm({ labels: props.columns })}
-      <button className="admin-btn" onClick={handleAdd}>Add New Record</button>
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <span className="close" onClick={() => setShowModal(false)}>
+              &times;
+            </span>
+            {renderAdminForm({ labels: props.columns })}
+          </div>
+        </div>
+      )}
+
       <table className="admin">
         <thead>
           <tr>
@@ -122,15 +142,29 @@ export default function AdminTable<T>(props: AdminTableProps) {
         <tbody>
           {data.map((item: any, index: any) => (
             <tr className="admin-row" key={index}>
-              {props.columns.map((column) => (
-                <td className="admin-body" key={column}>
-                  {item[column]}
-                </td>
-              ))}
+              {props.columns.map((column) =>
+                column === "image" ? (
+                  <td key={column}>
+                    <img
+                      className="admin-img"
+                      src={item[column] ? item[column] : ''}
+                      alt={column}
+                    />
+                  </td>
+                ) : (
+                  <td className="admin-body" key={column}>
+                    {item[column] ? item[column].toString() : ''}
+                  </td>
+                )
+              )}
               <td className="admin-body">
                 <button
                   className="btn admin-btn"
-                  onClick={() => handleUpdate(item._id)}
+                  onClick={() => {
+                    console.log(item);
+                    setCurrId(item._id);
+                    setShowModal(true);
+                  }}
                 >
                   Update
                 </button>
@@ -147,6 +181,20 @@ export default function AdminTable<T>(props: AdminTableProps) {
           ))}
         </tbody>
       </table>
+      <div className="add">
+        <div className="add-btn">
+          <button
+            type="submit"
+            className="admin-btn"
+            onClick={() => {
+              setShowModal(true);
+              setCurrId("");
+            }}
+          >
+            Add New Record
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

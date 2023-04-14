@@ -24,6 +24,7 @@ export default function Reviews() {
     fetchReviews();
   }, []);
 
+
   return (
     <div className="reviews">
       <h1 className="reviews-title">Reviews</h1>
